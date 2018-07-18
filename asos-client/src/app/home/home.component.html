@@ -1,0 +1,17 @@
+<h1>
+  Welcome</h1>
+
+<h2>Recommended Items</h2>
+<mat-grid-list cols="3" rowHeight="300px">
+  <mat-grid-tile *ngFor="let item of recommended">
+    <mat-card class="example-card">
+      <img mat-card-image 
+        [src]="item?.imageUrl" 
+        [alt]="item?.description">
+      <mat-card-actions align="end">
+        <span>{{item?.price}}</span>
+        <button mat-button>BUY</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
