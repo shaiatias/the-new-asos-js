@@ -47,6 +47,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   shareItem() {
-    this.bottomSheet.open(ShareProductComponent); 
+    this.bottomSheet.open(ShareProductComponent, {
+      data: {
+        product: this.product
+      }
+    }); 
   }
 }

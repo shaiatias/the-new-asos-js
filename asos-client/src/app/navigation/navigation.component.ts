@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -12,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
 
-  constructor(private breakpointObserver: BreakpointObserver,
+  constructor(
     private http: HttpClient,
     private router: Router) { }
 
