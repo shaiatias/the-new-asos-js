@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <mat-card *ngFor="let item of recommended">
+    <img mat-card-image [src]="item?.imageUrl" [alt]="item?.description">
+    <mat-card-actions align="end">
+      <button mat-button>MORE {{item?.department}}</button>
+      <button mat-button>BUY</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -17,6 +17,35 @@ export class RecommendedProductsService {
         imageUrl: "assets/item_111.jpg",
         name: "t shirt1",
         price: "25$",
+        department: "shirts",
+        description: "simple t shirt"
+      },
+      {
+        imageUrl: "assets/item_111.jpg",
+        name: "t shirt1",
+        price: "25$",
+        department: "shirts",
+        description: "simple t shirt"
+      },
+      {
+        imageUrl: "assets/item_111.jpg",
+        name: "t shirt1",
+        price: "25$",
+        department: "shirts",
+        description: "simple t shirt"
+      },
+      {
+        imageUrl: "assets/item_111.jpg",
+        name: "t shirt1",
+        price: "25$",
+        department: "shirts",
+        description: "simple t shirt"
+      },
+      {
+        imageUrl: "assets/item_111.jpg",
+        name: "t shirt1",
+        price: "25$",
+        department: "shirts",
         description: "simple t shirt"
       }
     ];

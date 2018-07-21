@@ -1,0 +1,26 @@
+
+
+.wrapper {
+    min-width: 100%;
+    min-height: 200px;
+    overflow-x: auto;
+    display: flex;
+}
+
+.mat-button {
+    text-transform: uppercase;
+}
+
+.mat-card:first-child {
+    padding-left: 16px;
+}
+
+.mat-card:last-child {
+    padding-right: 16px;
+}
+
+.mat-card {
+    min-width: 250px;
+    margin: 5px;
+}
+

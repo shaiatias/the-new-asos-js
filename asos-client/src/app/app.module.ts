@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
+import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './home/home.component';
     NavigationComponent,
     LoginComponent,
     CartComponent,
-    HomeComponent
+    HomeComponent,
+    RecommendedProductsComponent
   ],
   imports: [
     HttpClientModule,
