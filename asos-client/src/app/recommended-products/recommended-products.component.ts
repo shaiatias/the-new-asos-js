@@ -1,4 +1,4 @@
-import { RecommendedProductsService } from './../recommended-products.service';
+import { ProductsService } from './../products.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../product';
@@ -13,11 +13,11 @@ export class RecommendedProductsComponent implements OnInit {
   recommended: IProduct[] | null[] = [,,,,,,];
 
   constructor(private http: HttpClient,
-    private recommendedService: RecommendedProductsService) { }
+    private productsService: ProductsService) { }
 
   ngOnInit() {
     
-    this.recommendedService
+    this.productsService
       .getRecommendedProducts()
       .then((items) => this.recommended = items);
   }

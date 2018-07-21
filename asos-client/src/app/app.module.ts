@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
+import { DepartmentComponent } from './department/department.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RecommendedProductsComponent } from './recommended-products/recommended
     LoginComponent,
     CartComponent,
     HomeComponent,
-    RecommendedProductsComponent
+    RecommendedProductsComponent,
+    DepartmentComponent,
+    ProductDetailsComponent
   ],
   imports: [
     HttpClientModule,

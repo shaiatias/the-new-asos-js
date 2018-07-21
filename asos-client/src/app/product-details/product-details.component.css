@@ -1,0 +1,9 @@
+
+:host {
+    display: block;
+}
+
+:host > * {
+    max-width: 650px;
+    margin: auto;
+}

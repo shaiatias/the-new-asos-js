@@ -2,8 +2,8 @@
   <mat-card *ngFor="let item of recommended">
     <img mat-card-image [src]="item?.imageUrl" [alt]="item?.description">
     <mat-card-actions align="end">
-      <button mat-button>MORE {{item?.department}}</button>
-      <button mat-button>BUY</button>
+      <button mat-button [routerLink]="['/department/', item?.department]">MORE {{item?.department}}</button>
+      <button mat-button [routerLink]="['/product/', item?.id]">BUY</button>
     </mat-card-actions>
   </mat-card>
 </div>

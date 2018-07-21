@@ -11,16 +11,8 @@
     text-transform: uppercase;
 }
 
-.mat-card:first-child {
-    padding-left: 16px;
-}
-
-.mat-card:last-child {
-    padding-right: 16px;
-}
-
 .mat-card {
-    min-width: 250px;
-    margin: 5px;
+    min-width: 200px;
+    margin: 10px;
 }
 
