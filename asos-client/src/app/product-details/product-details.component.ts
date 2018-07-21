@@ -1,8 +1,11 @@
+import { ShareProductComponent } from './../share-product/share-product.component';
+import { CartService } from './../cart.service';
 import { Observable } from 'rxjs';
 import { ProductsService } from './../products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from "../product";
+import { MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +19,9 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cartService: CartService,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -33,15 +38,15 @@ export class ProductDetailsComponent implements OnInit {
     console.error(error);
   }
 
-  addToCart() {
-
+  addToCart(amount: number) {
+    this.cartService.addToCart(this.product, amount);
   }
 
   likeItem() {
-
+    this.productsService.likeItem(this.product);
   }
 
   shareItem() {
-    
+    this.bottomSheet.open(ShareProductComponent); 
   }
 }

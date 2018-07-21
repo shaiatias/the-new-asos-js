@@ -12,11 +12,6 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
 
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  //   .pipe(
-  //     map(result => result.matches)
-  //   );
-
   constructor(private breakpointObserver: BreakpointObserver,
     private http: HttpClient,
     private router: Router) { }

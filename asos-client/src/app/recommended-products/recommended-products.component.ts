@@ -19,7 +19,14 @@ export class RecommendedProductsComponent implements OnInit {
     
     this.productsService
       .getRecommendedProducts()
-      .then((items) => this.recommended = items);
+      .subscribe(
+        items => this.recommended = items,
+        err => this.onFetchError(err)
+      );
+  }
+
+  onFetchError(err) {
+    console.error(err);
   }
 
 }

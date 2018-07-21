@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatBottomSheetModule } from '@angular/material';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
 import { DepartmentComponent } from './department/department.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShareProductComponent } from './share-product/share-product.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     HomeComponent,
     RecommendedProductsComponent,
     DepartmentComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ShareProductComponent
   ],
   imports: [
     HttpClientModule,
@@ -39,10 +41,12 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatBottomSheetModule,
     BrowserAnimationsModule
   ],
   providers: [
   ],
+  entryComponents: [AppComponent, ShareProductComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
