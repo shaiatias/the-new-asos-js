@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { Injectable } from '@angular/core';
-import { IProduct } from './product';
-import { BehaviorSubject } from '../../node_modules/rxjs';
-import { tap, map } from '../../node_modules/rxjs/operators';
+import { IProduct } from '../../models/product';
+import { BehaviorSubject } from '../../../../node_modules/rxjs';
+import { tap, map } from '../../../../node_modules/rxjs/operators';
 
 interface CartContent {
   items: IProduct[]

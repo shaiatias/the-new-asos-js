@@ -7,14 +7,14 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButt
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CartComponent } from './cart/cart.component';
-import { HomeComponent } from './home/home.component';
-import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
-import { DepartmentComponent } from './department/department.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ShareProductComponent } from './share-product/share-product.component';
+import { CartComponent } from './components/cart/cart.component';
+import { HomeComponent } from './components/home/home.component';
+import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
+import { DepartmentComponent } from './components/department/department.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ShareProductComponent } from './components/share-product/share-product.component';
 
 @NgModule({
   declarations: [
