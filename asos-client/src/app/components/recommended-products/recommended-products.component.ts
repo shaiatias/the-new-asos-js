@@ -1,7 +1,7 @@
-import { ProductsService } from './../products.service';
+import { ProductsService } from '../../services/products/products.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from '../product';
+import { IProduct } from '../../models/product';
 
 @Component({
   selector: 'app-recommended-products',

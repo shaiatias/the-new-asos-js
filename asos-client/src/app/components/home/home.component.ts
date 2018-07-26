@@ -1,5 +1,5 @@
-import { RecommendedProductsService } from './../recommended-products.service';
-import { IProduct } from './../product';
+// import { RecommendedProductsService } from './../recommended-products.service';
+import { IProduct } from '../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
