@@ -1,4 +1,4 @@
-import { IProduct } from './../product';
+import { IProduct } from '../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
 

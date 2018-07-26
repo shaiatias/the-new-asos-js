@@ -1,10 +1,10 @@
 import { ShareProductComponent } from './../share-product/share-product.component';
-import { CartService } from './../cart.service';
+import { CartService } from '../../services/cart/cart.service';
 import { Observable } from 'rxjs';
-import { ProductsService } from './../products.service';
+import { ProductsService } from '../../services/products/products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from "../product";
+import { IProduct } from "../../models/product";
 import { MatBottomSheet } from '@angular/material';
 
 @Component({
