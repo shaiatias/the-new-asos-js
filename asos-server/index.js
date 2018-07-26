@@ -6,6 +6,7 @@ const session = require("express-session");
 const cors = require("cors");
 const proxy = require('express-http-proxy');
 
+const {initConnection} = require("./db");
 const api = require("./api");
 
 const app = express();
@@ -18,6 +19,17 @@ app.use("/api", api);
 
 app.get('/*', proxy('http://localhost:4200'));
 
-app.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`);
-});
+function startServer() {
+    
+    app.listen(PORT, () => {
+        console.log(`listening on port ${PORT}`);
+    });
+
+    require("./db/users");
+}
+
+initConnection()
+    .then(startServer)
+    .catch(err => {
+        console.error(err);
+    })

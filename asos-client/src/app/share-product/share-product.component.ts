@@ -13,13 +13,22 @@ export class ShareProductComponent implements OnInit {
 
   constructor(private bottomSheetRef: MatBottomSheetRef<ShareProductComponent>) {}
 
+  // TODO fix gui - show fb twitter and copy buttons
   ngOnInit() {
     this.product = this.bottomSheetRef.containerInstance.bottomSheetConfig.data;
   }
 
+  // TODO implement this
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
   }
+
+  // TODO implement
+  copy() {}
+
+  shareOnFacebook() {}
+
+  shareInTweeter() {}
 
 }
