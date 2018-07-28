@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -7,7 +8,15 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  private loggedIn = new BehaviorSubject(null);
+
+  constructor(private http: HttpClient) {
+    this.loggedIn.next(this.isAuthenticated());
+  }
+
+  isAuthenticated$(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
 
   isAuthenticated(): boolean {
     let user = localStorage.getItem('currentUser');
@@ -27,14 +36,19 @@ export class AuthenticationService {
             localStorage.setItem('currentUser', JSON.stringify(user));
           }
 
-        }));
+          // update loggedIn obervable
+          this.loggedIn.next(this.isAuthenticated());
+
+        }
+      ));
   }
 
   logout() {
 
     return this.http.post("/api/users/logout", {})
       .toPromise()
-      .then(() => { this.clearStorage() });
+      .then(() => { this.clearStorage() })
+      .then(() => { this.loggedIn.next(this.isAuthenticated()) });
   }
 
   private clearStorage() {
