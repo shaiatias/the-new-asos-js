@@ -68,6 +68,39 @@ class UsersController {
         }
     }
 
+    static async register(req, res) {
+
+        try {
+            // user already logged in
+            const existingUser = req.session.user;
+
+            if (existingUser) {
+                return res.json(existingUser);
+            }
+
+            // check if email or username is already in use
+            if (!await UsersService.usernameIsAvailable(req.body.username)) {
+                return res.status(400).json({ message: "username is already in use" });
+            }
+
+            if (!await UsersService.emailIsAvailable(req.body.email)) {
+                return res.status(400).json({ message: "email is already in use" });
+            }
+
+            // add the user
+            const user = await UsersService.createUser(req.body);
+
+            // return the new user object
+            req.session.user = user;
+
+            return res.json(user);
+        }
+        catch (e) {
+            
+            console.error(e);
+            return res.status(500).json({ message: "unexpected error" });
+        }
+    }
 }
 
 module.exports = { UsersController };

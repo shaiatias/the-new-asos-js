@@ -1,14 +1,11 @@
 
-const Schema = mongoose.Schema;
-const { getConnection } = require("./index");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
-    _id: Schema.Types.ObjectId,
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        auto: true,
     },
     username: {
         type: String,
@@ -16,11 +13,17 @@ const UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    password: {
+    email: {
         type: String,
+        unique: true,
         required: true,
+        trim: true
     },
-    passwordConf: {
+    name: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true,
     },
@@ -41,6 +44,6 @@ UserSchema.pre('save', function (next) {
     })
 });
 
-const User = getConnection().model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = { User };

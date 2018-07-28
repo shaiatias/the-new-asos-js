@@ -4,9 +4,9 @@ const { User } = require("../db/users");
 
 class UsersService {
 
-    static async authenticate(email, password) {
+    static async authenticate(username, password) {
 
-        const user = await User.findOne({ email }).exec();
+        const user = await User.findOne({ username }).exec();
 
         // user found
         if (user) {
@@ -28,6 +28,28 @@ class UsersService {
             return null;
         }
 
+    }
+
+    static async createUser(user, roles = ["customer"]) {
+        
+        const u = new User({
+            ...user,
+            roles: roles
+        });
+
+        return u.save();
+    }
+
+    static async usernameIsAvailable(username) {
+        
+        const found = await User.findOne({ username });
+        return !found;
+    }
+
+    static async emailIsAvailable(email) {
+
+        const found = await User.findOne({ email });
+        return !found;
     }
 
 }
