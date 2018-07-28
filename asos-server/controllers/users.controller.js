@@ -1,3 +1,4 @@
+const { UsersService } = require("../services/users.service")
 
 class UsersController {
 
@@ -46,18 +47,7 @@ class UsersController {
             const { username, password } = req.body;
 
             // find user in db
-            const user = await new Promise((resolve, reject) => {
-                setTimeout(() => {
-
-                    resolve({
-                        id: 1,
-                        username: "11",
-                        name: "shai",
-                        roles: ["admin"]
-                    });
-
-                }, 1 * 1000);
-            })
+            const user = await UsersService.authenticate(username, password);
 
             if (!user) {
                 return res.status(404).json({ message: "user is not found" })
