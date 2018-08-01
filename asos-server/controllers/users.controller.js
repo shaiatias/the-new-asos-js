@@ -1,3 +1,4 @@
+const { UsersService } = require("../services/users.service")
 
 class UsersController {
 
@@ -46,18 +47,7 @@ class UsersController {
             const { username, password } = req.body;
 
             // find user in db
-            const user = await new Promise((resolve, reject) => {
-                setTimeout(() => {
-
-                    resolve({
-                        id: 1,
-                        username: "11",
-                        name: "shai",
-                        roles: ["admin"]
-                    });
-
-                }, 1 * 1000);
-            })
+            const user = await UsersService.authenticate(username, password);
 
             if (!user) {
                 return res.status(404).json({ message: "user is not found" })
@@ -78,6 +68,39 @@ class UsersController {
         }
     }
 
+    static async register(req, res) {
+
+        try {
+            // user already logged in
+            const existingUser = req.session.user;
+
+            if (existingUser) {
+                return res.json(existingUser);
+            }
+
+            // check if email or username is already in use
+            if (!await UsersService.usernameIsAvailable(req.body.username)) {
+                return res.status(400).json({ message: "username is already in use" });
+            }
+
+            if (!await UsersService.emailIsAvailable(req.body.email)) {
+                return res.status(400).json({ message: "email is already in use" });
+            }
+
+            // add the user
+            const user = await UsersService.createUser(req.body);
+
+            // return the new user object
+            req.session.user = user;
+
+            return res.json(user);
+        }
+        catch (e) {
+            
+            console.error(e);
+            return res.status(500).json({ message: "unexpected error" });
+        }
+    }
 }
 
 module.exports = { UsersController };

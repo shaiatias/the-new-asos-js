@@ -1,31 +1,49 @@
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const { getConnection } = require("./index");
-
-
-
-var personSchema = Schema({
-    _id: Schema.Types.ObjectId,
-    name: String,
-    age: Number,
-    stories: [{ type: Schema.Types.ObjectId, ref: 'Story' }]
+const UserSchema = new mongoose.Schema({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        auto: true,
+    },
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    roles: {
+        type: [String],
+        required: true,
+    }
 });
 
-var storySchema = Schema({
-    author: { type: Schema.Types.ObjectId, ref: 'Person' },
-    title: String,
-    fans: [{ type: Schema.Types.ObjectId, ref: 'Person' }]
+UserSchema.pre('save', function (next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function (err, hash) {
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    })
 });
 
-var Story = getConnection().model('Story', storySchema);
-var Person = getConnection().model('Person', personSchema);
+const User = mongoose.model('User', UserSchema);
 
-var a = new Person({
-    _id: new mongoose.Types.ObjectId(), 
-    name: 'Ian Fleming',
-    age: 50
-})
-
-a.save();
+module.exports = { User };

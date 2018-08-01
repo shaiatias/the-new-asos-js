@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { AuthGuard } from './services/_guard/auth.guard';
@@ -14,6 +15,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
     },
     {
         path: 'cart',

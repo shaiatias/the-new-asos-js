@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,12 +12,16 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class NavigationComponent {
 
+  loggedIn: Observable<boolean> = this.auth.isAuthenticated$();
+
   constructor(
     private http: HttpClient,
     private router: Router,
-    private auth: AuthenticationService) { }
+    private auth: AuthenticationService) {}
 
   logout() {
-    this.auth.logout();  
+    this.auth
+      .logout()
+      .then(() => this.router.navigate(['/']));
   }
 }
