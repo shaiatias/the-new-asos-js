@@ -53,10 +53,10 @@ class ProductsController {
 
     static async getById(req, res) {
 
-        const found = await ProductsService.findById(id);
+        const found = await ProductsService.findById(req.params.id);
 
-        if (found[0]) {
-            res.json(found[0]);
+        if (found) {
+            res.json(found);
         }
 
         else {

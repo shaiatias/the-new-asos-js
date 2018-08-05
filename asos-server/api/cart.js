@@ -12,6 +12,8 @@ const validateAddItem = [
     check('amount').isNumeric().exists(),
 ];
 
-router.post("/add-item", authenticatedUser, validateAddItem, rejectInvalidRequest, CartController.addItem);
+router.post("/add-item", authenticatedUser(), validateAddItem, rejectInvalidRequest, CartController.addItem);
+
+router.get("/", authenticatedUser(), CartController.getCart);
 
 module.exports = router;

@@ -1,10 +1,6 @@
 
 const mongoose = require("mongoose");
 
-const { UserSchema } = require("./users");
-const { ProductSchema } = require("./products");
-
-
 const CartSchema = new mongoose.Schema({
 
     user: {
@@ -18,7 +14,8 @@ const CartSchema = new mongoose.Schema({
 
     totalPrice: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
 
 });

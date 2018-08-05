@@ -4,10 +4,10 @@ const { UsersService } = require("../services/users.service")
 class CartController {
 
     static async addItem(req, res) {
-        
+
         // get request parameters
         const { product, amount } = req.body;
-        const user = req.user;
+        const { user } = req.session;
 
         try {
 
@@ -17,7 +17,27 @@ class CartController {
             return res.json(updatedCart);
         }
 
-        catch (e) { // unexpected error
+        catch (e) {
+            console.error("unexpected error in addItem", e);
+            return res.status(500).json({ message: "unexpected error" });
+        }
+    }
+
+    static async getCart(req, res) {
+        
+        const { user } = req.session;
+
+        try {
+            const userCart = await CartService.getCartByUserId(user._id);
+            
+            await userCart
+                .populate("products")
+                .execPopulate();
+
+            res.json(userCart);
+        }
+
+        catch (e) {
             console.error("unexpected error in addItem", e);
             return res.status(500).json({ message: "unexpected error" });
         }
