@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { IProduct } from '../../models/product';
 import { BehaviorSubject } from '../../../../node_modules/rxjs';
 import { tap, map } from '../../../../node_modules/rxjs/operators';
+import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 
 interface CartContent {
   items: IProduct[]
@@ -18,7 +19,9 @@ export class CartService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.syncCartContent();
   }
@@ -27,7 +30,7 @@ export class CartService {
     return this.http
       .get("/api/cart")
       .pipe(
-        map(items => <CartContent> items),
+        map(items => <CartContent>items),
         tap(items => this.cartContent.next(items))
       );
   }
@@ -38,15 +41,26 @@ export class CartService {
 
   async addToCart(product: IProduct, amount: number) {
 
-    if (!this.authService.isAuthenticated()) {
-      throw new Error("user is not logged in");
-    }
-
     // send update
     const body = { product, amount };
-    await this.http.post("/api/cart/add-item", body).toPromise();
 
-    // update cart subject
-    await this.syncCartContent().toPromise();
+    try {
+      await this.http.post("/api/cart/add-item", body).toPromise();
+
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
   }
 }
+
