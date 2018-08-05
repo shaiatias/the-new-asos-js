@@ -1,0 +1,59 @@
+
+const mongoose = require("mongoose");
+
+const { UserSchema } = require("./users");
+const { ProductSchema } = require("./products");
+
+
+const CartSchema = new mongoose.Schema({
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
+    }],
+
+    totalPrice: {
+        type: Number,
+        required: true
+    },
+
+});
+
+CartSchema.pre('save', async function (next) {
+    const cart = this;
+
+    await cart.populate('products').execPopulate();
+
+    cart.totalPrice = (cart.products || []).reduce((temp, item) => {
+        return temp + item.price;
+    }, 0);
+
+    next();
+})
+
+const Cart = mongoose.model('Cart', CartSchema);
+
+module.exports = { Cart, CartSchema };
+
+// ["aaa", "aaaa"].reduce(
+//     (acc, item) => {
+//         return acc + item + " "
+//     },
+//     ""
+// );
+
+// const filter = (arr, fn) => arr.reduce(
+//     (acc, item) => {
+
+//         if (fn(item)) {
+//             return acc.concat(item)
+//         } else {
+//             return acc
+//         }
+//     },
+//     []
+// );

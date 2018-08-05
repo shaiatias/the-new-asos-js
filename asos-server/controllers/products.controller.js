@@ -1,56 +1,59 @@
 
-const products = [
-    {
-      id: 1,
-      imageUrl: "assets/item_111.jpg",
-      name: "t shirt1",
-      price: "25$",
-      department: "shirts",
-      description: "simple t shirt"
-    },
-    {
-      id: 2,
-      imageUrl: "assets/item_111.jpg",
-      name: "t shirt2",
-      price: "25$",
-      department: "shirts",
-      description: "simple t shirt"
-    },
-    {
-      id: 3,
-      imageUrl: "assets/item_111.jpg",
-      name: "t shirt3",
-      price: "25$",
-      department: "shirts",
-      description: "simple t shirt"
-    },
-    {
-      id: 4,
-      imageUrl: "assets/item_111.jpg",
-      name: "t shirt4",
-      price: "25$",
-      department: "shirts",
-      description: "simple t shirt"
-    },
-    {
-      id: 5,
-      imageUrl: "assets/item_111.jpg",
-      name: "t shirt5",
-      price: "25$",
-      department: "shirts",
-      description: "simple t shirt"
-    }
-  ];
+// const products = [
+//     {
+//       id: 1,
+//       imageUrl: "assets/item_111.jpg",
+//       name: "t shirt1",
+//       price: "25$",
+//       department: "shirts",
+//       description: "simple t shirt"
+//     },
+//     {
+//       id: 2,
+//       imageUrl: "assets/item_111.jpg",
+//       name: "t shirt2",
+//       price: "25$",
+//       department: "shirts",
+//       description: "simple t shirt"
+//     },
+//     {
+//       id: 3,
+//       imageUrl: "assets/item_111.jpg",
+//       name: "t shirt3",
+//       price: "25$",
+//       department: "shirts",
+//       description: "simple t shirt"
+//     },
+//     {
+//       id: 4,
+//       imageUrl: "assets/item_111.jpg",
+//       name: "t shirt4",
+//       price: "25$",
+//       department: "shirts",
+//       description: "simple t shirt"
+//     },
+//     {
+//       id: 5,
+//       imageUrl: "assets/item_111.jpg",
+//       name: "t shirt5",
+//       price: "25$",
+//       department: "shirts",
+//       description: "simple t shirt"
+//     }
+//   ];
+
+const { ProductsService } = require("../services/products.service")
 
 class ProductsController {
 
-    static getAll(req, res) {
+    static async getAll(req, res) {
+        const products = await ProductsService.getAll();
         res.json(products);
     }
 
-    static getById(req, res) {
+    static async getById(req, res) {
 
-        const found = products.filter(item => item.id == req.params.id);
+        const found = await ProductsService.findById(id);
 
         if (found[0]) {
             res.json(found[0]);
@@ -61,7 +64,8 @@ class ProductsController {
         }
     }
 
-    static getRecommended(req, res) {
+    static async getRecommended(req, res) {
+        const products = await ProductsService.getAll();
         res.json(products);
     }
 

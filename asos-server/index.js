@@ -8,6 +8,8 @@ const cors = require("cors");
 const proxy = require('express-http-proxy');
 
 const {initConnection} = require("./db");
+const {fillDb} = require("./db/fillDb");
+
 const api = require("./api");
 
 const app = express();
@@ -32,6 +34,7 @@ function startServer() {
 }
 
 initConnection()
+    .then(fillDb)
     .then(startServer)
     .catch(err => {
         console.error(err);
