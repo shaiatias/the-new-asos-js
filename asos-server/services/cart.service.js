@@ -16,10 +16,9 @@ class CartService {
     static async addProductToCart(user, product) {
 
         const userCart = await this.getCartByUserId(user._id);
-        const updatedUserCart = await Cart.findOneAndUpdate(userCart.products, userCart.products.push(product))
+        userCart.products.push(product._id);
 
-
-        return updatedUserCart;
+        return await userCart.save();
     }
 }
 

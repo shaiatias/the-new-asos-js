@@ -1,37 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationService } from '../authentication/authentication.service';
 import { Injectable } from '@angular/core';
-import { IProduct } from '../../models/product';
-import { BehaviorSubject } from '../../../../node_modules/rxjs';
-import { tap, map } from '../../../../node_modules/rxjs/operators';
-import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-interface CartContent {
-  items: IProduct[]
-}
+import { IProduct } from '../../models/product';
+import { ICart } from "../../models/cart";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private cartContent = new BehaviorSubject<CartContent>(null);
+  private cartContent = new BehaviorSubject<ICart>(null);
 
   constructor(
     private http: HttpClient,
-    private authService: AuthenticationService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.syncCartContent();
-  }
+  ) {}
 
-  private syncCartContent() {
+  syncCartContent() {
+    
     return this.http
-      .get("/api/cart")
+      .get("/api/cart/")
       .pipe(
-        map(items => <CartContent>items),
-        tap(items => this.cartContent.next(items))
+        // map(items => <ICart>items),
+        tap(items => this.cartContent.next(<ICart>items))
       );
   }
 
