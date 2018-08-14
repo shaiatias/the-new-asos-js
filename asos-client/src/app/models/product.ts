@@ -10,4 +10,8 @@ export interface IProduct {
     description: string,
     department: ProductDepartment
   }
+
+  export interface IProductInCart extends IProduct{
+    quantity: number
+  }
   

@@ -34,7 +34,6 @@ export class CartService {
   }
 
   async addToCart(product: IProduct, amount: number) {
-    debugger;
     // send update
     const body = { product, amount };
 

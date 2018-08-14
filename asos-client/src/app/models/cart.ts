@@ -1,7 +1,7 @@
 
-import { IProduct } from "./product";
+import { IProduct, IProductInCart } from "./product";
 
 export interface ICart {
-    totalPrice: number,
-    product: IProduct[]
+    totalPrice?: number,
+    products: IProductInCart[]
 }

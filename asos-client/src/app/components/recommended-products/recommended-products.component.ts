@@ -26,7 +26,7 @@ export class RecommendedProductsComponent implements OnInit {
   }
 
   onFetchError(err) {
-    console.error(err);
+    console.error("recommended products",err);
   }
 
 }
