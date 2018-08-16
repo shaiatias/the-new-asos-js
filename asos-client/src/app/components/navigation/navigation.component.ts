@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart/cart.service';
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -17,11 +18,16 @@ export class NavigationComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private auth: AuthenticationService) {}
+    private auth: AuthenticationService,
+    private cartService: CartService) {}
 
   logout() {
     this.auth
       .logout()
       .then(() => this.router.navigate(['/']));
+  }
+
+  goToCart(){
+    this.cartService.syncCartContent().toPromise().then(() => this.router.navigate(['/cart']))
   }
 }

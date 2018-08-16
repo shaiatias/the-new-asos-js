@@ -20,7 +20,6 @@ export class CartService {
   ) {}
 
   syncCartContent() {
-    
     return this.http
       .get("/api/cart/")
       .pipe(
