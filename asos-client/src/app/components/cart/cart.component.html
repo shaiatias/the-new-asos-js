@@ -2,9 +2,9 @@
 <div id=cart style="margin-top: 80px">
 
 <div *ngIf="cart$| async as cart">
-  <mat-card *ngFor="let product of cart.products " class="example-card">
+  <mat-card *ngFor="let product of cart.products " >
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar></div>
         <mat-card-title>{{product.name}}</mat-card-title>
         <mat-card-subtitle>{{product.price | currency: 'USD':true}}</mat-card-subtitle>
       </mat-card-header>
