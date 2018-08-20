@@ -20,6 +20,22 @@ class CartService {
 
         return await userCart.save();
     }
+
+    static async removePdtFromCart(user, product) {
+
+        const userCart = await this.getCartByUserId(user._id);
+
+        const found = userCart.products.filter(p => p._id.toString() === product._id.toString()) || [];
+
+        if (found[0]) {
+            const index = userCart.products.indexOf(found[0]);
+            userCart.products.splice(index, 1);
+
+            return await userCart.save();
+        }
+
+        return userCart;
+    }
 }
 
 module.exports = { CartService };

@@ -6,7 +6,7 @@ class CartController {
     static async addItem(req, res) {
         // get request parameters
         const { product, amount } = req.body;
-       // const { user } = req.session.user;
+        // const { user } = req.session.user;
 
         try {
 
@@ -22,13 +22,32 @@ class CartController {
         }
     }
 
-    static async getCart(req, res) {
+    static async removeItem(req, res) {
         
+        // get request parameters
+        const { product, amount } = req.body;
+
+        try {
+
+            //find user cart in db and removing first item to products[]
+            const updatedCart = await CartService.removePdtFromCart(req.session.user, product);
+
+            return res.json(updatedCart);
+        }
+
+        catch (e) {
+            console.error("unexpected error in removeItem", e);
+            return res.status(500).json({ message: "unexpected error" });
+        }
+    }
+
+    static async getCart(req, res) {
+
         const { user } = req.session;
 
         try {
             const userCart = await CartService.getCartByUserId(user._id);
-            
+
             await userCart
                 .populate("products")
                 .execPopulate();

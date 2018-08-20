@@ -7,6 +7,7 @@ const CartSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+
     products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
@@ -35,22 +36,3 @@ CartSchema.pre('save', async function (next) {
 const Cart = mongoose.model('Cart', CartSchema);
 
 module.exports = { Cart, CartSchema };
-
-// ["aaa", "aaaa"].reduce(
-//     (acc, item) => {
-//         return acc + item + " "
-//     },
-//     ""
-// );
-
-// const filter = (arr, fn) => arr.reduce(
-//     (acc, item) => {
-
-//         if (fn(item)) {
-//             return acc.concat(item)
-//         } else {
-//             return acc
-//         }
-//     },
-//     []
-// );

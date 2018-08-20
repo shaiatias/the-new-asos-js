@@ -20,6 +20,7 @@
         <a mat-list-item [routerLink]="['/']">Homepage</a>
         <a mat-list-item [routerLink]="['login']">Login</a>
         <a mat-list-item [routerLink]="['register']">Register</a>
+        <a mat-list-item *ngIf="loggedIn | async" [routerLink]="['cart']">Register</a>
         <mat-list-item *ngIf="loggedIn | async" (click)="goToCart()">My Cart</mat-list-item>
         <mat-list-item (click)="logout()">Logout</mat-list-item>
       </mat-nav-list>

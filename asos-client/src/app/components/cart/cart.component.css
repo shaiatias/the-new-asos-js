@@ -1,0 +1,31 @@
+
+:host {
+    display: block;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    padding: 8px;
+}
+
+.cart-view {
+    display: flex;
+    flex-direction:  row;
+    width:  100%;
+    justify-content: stretch;
+    align-items: start;
+}
+
+.summary-card {
+    min-width: 300px;
+    margin: 8px 0 0 16px;
+}
+
+mat-list {
+    flex: 1;
+}
+
+.mat-card {
+    margin-bottom: 16px;
+}
