@@ -7,7 +7,21 @@ import { Router } from '@angular/router';
 import { IProduct } from '../../models/product';
 import { ICart } from "../../models/cart";
 
-const initialValue: ICart = { "products": [{ "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }, { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt", "__v": 0 }], "totalPrice": 250 }
+const initialValue: ICart = {
+  "products": [
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt" },
+    { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt" }
+  ],
+  "totalPrice": 250
+};
 
 @Injectable({
   providedIn: 'root'

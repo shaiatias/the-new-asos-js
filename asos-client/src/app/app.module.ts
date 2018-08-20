@@ -12,7 +12,7 @@ import {UserService} from './services/user/user.service';
 
 
 import { AppComponent } from './app.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatBottomSheetModule, MatInputModule } from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatBottomSheetModule, MatInputModule, MatChipsModule, MatBadgeModule } from '@angular/material';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -57,6 +57,8 @@ import { AlertComponent } from './components/alert/alert.component';
     MatSidenavModule,
     MatListModule,
     MatBottomSheetModule,
+    MatChipsModule, 
+    MatBadgeModule,
     BrowserAnimationsModule
   ],
   providers: [

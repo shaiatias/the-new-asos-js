@@ -17,7 +17,7 @@ const sleep = (time) => new Promise(resolve => setTimeout(resolve, time));
 })
 export class CartComponent implements OnInit {
 
-  private cart$: Observable<ICartGroup>;
+  public cart$: Observable<ICartGroup>;
 
   constructor(
     private cartService: CartService
@@ -40,7 +40,8 @@ export class CartComponent implements OnInit {
             .map((key, index, array) => ({ 
               item: cart.products.find(item => item._id.toString() === key), 
               quantity: productGroup[key] 
-            }))
+            })),
+            itemCount: cart.products.length
           };
 
           return newCart;

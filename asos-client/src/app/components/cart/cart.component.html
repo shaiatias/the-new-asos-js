@@ -1,49 +1,57 @@
-
 <h1>
   My Cart
 </h1>
 
-<div *ngIf="cart$| async as cart" class="cart-view">
-  
+<div *ngIf="cart$ | async as cart" class="cart-view">
+
   <mat-list>
 
     <mat-card *ngFor="let product of cart.products">
-      <!-- <mat-card-header> -->
-      <!-- <div mat-card-avatar></div> -->
-      <mat-card-title>{{product.item.name}}</mat-card-title>
-      <mat-card-subtitle>{{product.item.price | currency: 'USD':"true"}}</mat-card-subtitle>
-      <!-- </mat-card-header> -->
-      <img mat-card-image [src]="product.item.imageUrl" alt="product.item.name" style="height: 120px; width: auto;">
-      <mat-card-content>
 
-        <p>
-          {{product.item.description}}
-        </p>
-        <p>
-          {{ product.quantity }}
-        </p>
-        <!-- <p> -->
-        <!-- {{ product | json }} -->
-        <!-- </p> -->
+      <mat-card-content class="product-row">
+                
+        <img [src]="product.item.imageUrl" alt="product.item.name" class="product-image">
+        
+        <div>
+          <mat-card-title>{{product.item.name}}</mat-card-title>
+          <div>{{product.item.description}}</div>
+        </div>
+        
+        <div class="product-actions">
+          <button (click)="removePdtFromCart(product.item)" class="quantity-button">-</button>
+          <mat-chip-list [selectable]="false">
+            <mat-chip>{{ product.quantity }}</mat-chip>
+          </mat-chip-list>
+          <button (click)="addPdtToCart(product.item)" class="quantity-button">+</button>
+        </div>
+        
+        <div>{{product.item.price | currency: 'USD':true}}</div>
+        
+        <div>x</div>
+
       </mat-card-content>
-      <mat-card-actions>
-        <button (click)="addPdtToCart(product.item)" mat-mini-fab color="primary">+</button>
-        <button (click)="removePdtFromCart(product.item)" mat-mini-fab color="basic">-</button>
-      </mat-card-actions>
     </mat-card>
 
   </mat-list>
 
   <mat-card class="summary-card">
-      <mat-card-header>
-        <mat-card-title>summary</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          totalPrice: {{ cart.totalPrice }}
-        </p>
-      </mat-card-content>
-    </mat-card>
+    <mat-card-content>
+      
+      <h1>Summary</h1>
 
+      <p>
+        Price: {{ cart.totalPrice }}
+      </p>
+      
+      <p>
+        {{ cart.itemCount }} items
+      </p>
 
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Checkout</button>
+    </mat-card-actions>
+
+  </mat-card>
 </div>

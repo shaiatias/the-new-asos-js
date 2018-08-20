@@ -3,10 +3,10 @@ export type ProductDepartment =
   "shirts";
 
 export interface IProduct {
-  _id: number,
+  _id: string,
   name: string,
   imageUrl: string,
-  price: string,
+  price: number,
   description: string,
   department: ProductDepartment
 }
