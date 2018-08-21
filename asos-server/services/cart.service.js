@@ -36,6 +36,25 @@ class CartService {
 
         return userCart;
     }
+
+    
+    static async removeAllItems(user, product) {
+
+        const userCart = await this.getCartByUserId(user._id);
+
+        const found = userCart.products.filter(p => p._id.toString() === product._id.toString()) || [];
+
+        if (found) {
+            found.forEach(item => {
+               let index= userCart.products.indexOf(item);
+               userCart.products.splice(index, 1);
+            });
+
+            return await userCart.save();
+        }
+
+        return userCart;
+    }
 }
 
 module.exports = { CartService };

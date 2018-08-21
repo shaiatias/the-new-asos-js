@@ -18,5 +18,7 @@ router.post("/add-item", authenticatedUser(), validateAddItem, rejectInvalidRequ
 
 router.post("/remove-item", authenticatedUser(), validateAddItem, rejectInvalidRequest, CartController.removeItem);
 
+router.post("/remove-all-items", authenticatedUser(), rejectInvalidRequest, CartController.removeAllItems);
+
 
 module.exports = router;

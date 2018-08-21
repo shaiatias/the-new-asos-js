@@ -26,8 +26,8 @@
         </div>
         
         <div>{{product.item.price | currency: 'USD':true}}</div>
-        
-        <div>x</div>
+       
+        <button (click)="removeAllItemsFromCart(product.item)" class="quantity-button">x</button>
 
       </mat-card-content>
     </mat-card>

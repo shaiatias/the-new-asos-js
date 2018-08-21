@@ -95,5 +95,30 @@ export class CartService {
       }
     }
   }
+
+
+  async removeAllItemsFromCart(product: IProduct) {
+    debugger;
+    // send update
+    const body = { product };
+
+    try {
+      await this.http.post("/api/cart/remove-all-items", body).toPromise();
+      debugger;
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
+  }
 }
 

@@ -41,6 +41,25 @@ class CartController {
         }
     }
 
+    static async removeAllItems(req, res){
+
+         // get request parameters
+         const { product} = req.body;
+
+         try {
+ 
+             //find user cart in db and removing first item to products[]
+             const updatedCart = await CartService.removeAllItems(req.session.user, product);
+ 
+             return res.json(updatedCart);
+         }
+ 
+         catch (e) {
+             console.error("unexpected error in removeAllItems", e);
+             return res.status(500).json({ message: "unexpected error" });
+         }
+    }
+
     static async getCart(req, res) {
 
         const { user } = req.session;
