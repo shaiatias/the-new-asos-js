@@ -40,7 +40,6 @@ export class CartService {
     return this.http
       .get("/api/cart/")
       .pipe(
-        // map(items => <ICart>items),
         tap(items => this.cartContent.next(<ICart>items))
       );
   }
@@ -98,13 +97,11 @@ export class CartService {
 
 
   async removeAllItemsFromCart(product: IProduct) {
-    debugger;
     // send update
     const body = { product };
 
     try {
       await this.http.post("/api/cart/remove-all-items", body).toPromise();
-      debugger;
       // update cart subject
       await this.syncCartContent().toPromise();
     }
