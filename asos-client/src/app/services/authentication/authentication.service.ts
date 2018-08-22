@@ -56,4 +56,9 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
+  getUser(){
+    let user = localStorage.getItem('currentUser');
+    return user;
+  }
+
 }

@@ -22,6 +22,15 @@ h1 {
     margin: 8px 0 0 16px;
 }
 
+.payment-card{
+    display: flex;
+    flex-direction: column;
+}
+
+ .payment-detail{
+    width: 100%;
+}
+
 mat-list {
     flex: 1;
 }

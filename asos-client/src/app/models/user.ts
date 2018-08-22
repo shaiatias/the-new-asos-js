@@ -6,4 +6,9 @@ export class User {
     password: string;
     passwordConfirm: string;
     roles: string[];
+    firstName?: string;
+    lastName?: string;
+    cardNumer?: string;
+    cvv?: string;
+    address?: string;
 }
