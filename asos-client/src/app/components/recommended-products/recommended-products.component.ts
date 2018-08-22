@@ -10,7 +10,8 @@ import { IProduct } from '../../models/product';
 })
 export class RecommendedProductsComponent implements OnInit {
 
-  recommended: IProduct[] | null[] = [,,,,,,];
+  recommended: IProduct[] =[];
+  filteredProducts: IProduct[];
 
   constructor(private http: HttpClient,
     private productsService: ProductsService) { }
@@ -20,9 +21,15 @@ export class RecommendedProductsComponent implements OnInit {
     this.productsService
       .getRecommendedProducts()
       .subscribe(
-        items => this.recommended = items,
+        items => this.filteredProducts=this.recommended = items,
         err => this.onFetchError(err)
       );
+  }
+
+  filter(query: string){
+    console.log("query",query);
+    this.filteredProducts= (query)? this.recommended.filter(p =>p.name.toLowerCase().includes(query.toLowerCase())) : this.recommended;
+    console.log("filtered products", this.filteredProducts);
   }
 
   onFetchError(err) {
