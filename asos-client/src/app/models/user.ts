@@ -1,3 +1,5 @@
+import { PaymentDetails } from "./payment-details";
+
 export class User {
     id: string;
     username: string;
@@ -5,10 +7,6 @@ export class User {
     name: string;
     password: string;
     passwordConfirm: string;
-    roles: string[];
-    firstName?: string;
-    lastName?: string;
-    cardNumer?: string;
-    cvv?: string;
-    address?: string;
+    roles: string[]= [];
+    paymentDetails?: PaymentDetails = {};
 }

@@ -46,36 +46,36 @@
    
           <div>
             <mat-form-field>
-              <input matInput placeholder="First name" required>
+              <input matInput [(ngModel)]="user?.paymentDetails.firstName" type="text" placeholder="First name" required>
               <div *ngIf="false" class="invalid-feedback"> Username is required</div>
             </mat-form-field>
             <br>
 
             <mat-form-field>
-              <input matInput placeholder="Last name" name="lastName" required>
+              <input matInput [(ngModel)]="user?.paymentDetails.lastName" placeholder="Last name" name="lastName" required>
               <div *ngIf="false" class="invalid-feedback">Last name is required</div>
             </mat-form-field>
             <br>
 
             <mat-form-field>
-                <input matInput placeholder="Address" name="adress" required>
+                <input matInput  [(ngModel)]="user?.paymentDetails.address" placeholder="Address" name="adress" required>
                 <div *ngIf="false" class="invalid-feedback">Address is required</div>
               </mat-form-field>
               <br>
 
             <mat-form-field>
-              <input matInput placeholder="Credit Card number" name="cardNumber" required>
+              <input matInput  [(ngModel)]="user?.paymentDetails.cardNumber" placeholder="Credit Card number" name="cardNumber" required>
               <div *ngIf="false" class="invalid-feedback">Credit Card number is required</div>
             </mat-form-field>
             <br>
             <mat-form-field>
-              <input matInput placeholder="cvv" type="password" name="cvv" required>
-              <div *ngIf="false" class="invalid-feedback">Cvv is required</div>
+              <input matInput  [(ngModel)]="user?.paymentDetails.cvv" placeholder="cvv" type="password" name="cvv" required>
+              <div *ngIf="cvvMissing" class="invalid-feedback">Cvv is required</div>
             </mat-form-field>
             <br>
 
             <div class="button-row">
-              <button mat-raised-button color="primary">Pay</button>
+              <button  (click)="pay(cart._id)"mat-raised-button color="primary">Pay</button>
             </div>
           </div>
         </mat-card-content>

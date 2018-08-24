@@ -55,6 +55,16 @@ class CartService {
 
         return userCart;
     }
+
+    static async cleanCart(user) {
+
+        const userCart = await this.getCartByUserId(user._id);
+
+        userCart.products= [];
+
+        return await userCart.save();
+        
+    }
 }
 
 module.exports = { CartService };

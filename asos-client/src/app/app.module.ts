@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {AlertService} from './services/alerts/alerts.service';
 import {AuthGuard} from './services/_guard/auth.guard';
@@ -12,7 +13,8 @@ import {UserService} from './services/user/user.service';
 
 
 import { AppComponent } from './app.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatBottomSheetModule, MatInputModule, MatChipsModule, MatBadgeModule } from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule,
+   MatListModule, MatBottomSheetModule, MatSnackBarModule, MatInputModule, MatChipsModule, MatBadgeModule } from '@angular/material';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +28,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ShareProductComponent } from './components/share-product/share-product.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -39,13 +42,15 @@ import { AlertComponent } from './components/alert/alert.component';
     ProductDetailsComponent,
     ShareProductComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    MyOrdersComponent
   ],
   imports: [
     HttpClientModule,
     AppRoutingModule,
     BrowserModule,
-    ReactiveFormsModule,  
+    ReactiveFormsModule, 
+    FormsModule, 
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
@@ -59,6 +64,7 @@ import { AlertComponent } from './components/alert/alert.component';
     MatBottomSheetModule,
     MatChipsModule, 
     MatBadgeModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [

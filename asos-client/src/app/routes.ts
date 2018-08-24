@@ -1,3 +1,4 @@
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { DepartmentComponent } from './components/department/department.component';
@@ -23,6 +24,11 @@ export const routes: Routes = [
     {
         path: 'cart',
         component: CartComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'my-orders',
+        component: MyOrdersComponent,
         canActivate: [AuthGuard]
     },
     {
