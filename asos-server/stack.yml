@@ -24,6 +24,12 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+
 volumes:
   dbconfig:
   dbdata:

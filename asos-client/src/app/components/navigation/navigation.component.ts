@@ -1,9 +1,11 @@
+import { map } from 'rxjs/operators';
+import { CartService } from './../../services/cart/cart.service';
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { ICart } from '../../models/cart';
 
 @Component({
   selector: 'navigation',
@@ -13,15 +15,27 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 export class NavigationComponent {
 
   loggedIn: Observable<boolean> = this.auth.isAuthenticated$();
+  cart$ : Observable<ICart>;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private auth: AuthenticationService) {}
+    private auth: AuthenticationService,
+    private cartService: CartService) {}
 
   logout() {
     this.auth
       .logout()
       .then(() => this.router.navigate(['/']));
   }
+
+  goToCart(){
+    this.cartService.syncCartContent().toPromise().then(() => this.router.navigate(['/cart']))
+  }
+
+  ngOnInit(){
+
+    this.cart$=this.cartService.getCart();
+  }
+ 
 }

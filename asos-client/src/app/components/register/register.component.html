@@ -27,9 +27,8 @@
         <mat-error *ngIf="submitted && f.passwordConfirm.errors">Password is required</mat-error>
     </mat-form-field>
 
-    <div>
-        <input mat-raised-button color="primary" type="submit" value="Register" />
-        <!-- <button matInput mat-raised-button color="primary" (click)="onSubmit($event)">Register</button> -->
+    <div class="button-row">
+        <button  [disabled]="loading" mat-raised-button color="primary"  type="submit" value="Register">Register</button>
     </div>
 
 </form>

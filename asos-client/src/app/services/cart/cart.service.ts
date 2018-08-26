@@ -1,34 +1,47 @@
+import { User } from './../../models/user';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationService } from '../authentication/authentication.service';
 import { Injectable } from '@angular/core';
-import { IProduct } from '../../models/product';
-import { BehaviorSubject } from '../../../../node_modules/rxjs';
-import { tap, map } from '../../../../node_modules/rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-interface CartContent {
-  items: IProduct[]
-}
+import { IProduct } from '../../models/product';
+import { ICart } from "../../models/cart";
+
+const initialValue: ICart = {
+   "products": [
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a1", "imageUrl": "assets/item_111.jpg", "name": "t shirt1", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt" },
+  //   { "_id": "5b675f06ccf8822ee82873a4", "imageUrl": "assets/item_111.jpg", "name": "t shirt4", "price": 25, "department": "shirts", "description": "simple t shirt" }
+  ],
+  "totalPrice": 0
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private cartContent = new BehaviorSubject<CartContent>(null);
+  private cartContent =  new BehaviorSubject<ICart>( initialValue);
 
   constructor(
     private http: HttpClient,
-    private authService: AuthenticationService
-  ) {
-    this.syncCartContent();
-  }
+    private router: Router,
+  ) { }
 
-  private syncCartContent() {
+  syncCartContent() {
+
     return this.http
-      .get("/api/cart")
+      .get("/api/cart/")
       .pipe(
-        map(items => <CartContent> items),
-        tap(items => this.cartContent.next(items))
+        tap(items => this.cartContent.next(<ICart>items))
       );
   }
 
@@ -37,16 +50,98 @@ export class CartService {
   }
 
   async addToCart(product: IProduct, amount: number) {
-
-    if (!this.authService.isAuthenticated()) {
-      throw new Error("user is not logged in");
-    }
-
     // send update
     const body = { product, amount };
-    await this.http.post("/api/cart/add-item", body).toPromise();
 
-    // update cart subject
-    await this.syncCartContent().toPromise();
+    try {
+      await this.http.post("/api/cart/add-item", body).toPromise();
+
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
+  }
+
+  //decreases the qty of a specific product in the cart
+  async removePdtFromCart(product: IProduct, amount: number) {
+    // send update
+    const body = { product, amount };
+
+    try {
+      await this.http.post("/api/cart/remove-item", body).toPromise();
+
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
+  }
+
+
+  async removeAllItemsFromCart(product: IProduct) {
+    // send update
+    const body = { product };
+
+    try {
+      await this.http.post("/api/cart/remove-all-items", body).toPromise();
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
+  }
+
+  async pay(user: User, cartId){
+    //let cart = await this.getCart();
+    debugger
+     // send update
+     const body = { user, cartId };
+
+    try {
+      await this.http.post("/api/cart/pay", body).toPromise();
+
+      // update cart subject
+      await this.syncCartContent().toPromise();
+    }
+
+    catch (err) {
+
+      if (err.status === 401) {
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
+      }
+
+      else {
+        throw err;
+      }
+    }
   }
 }
+

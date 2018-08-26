@@ -7,8 +7,8 @@
     <h1 class="app-name">The New Asos</h1>
     <div class="spacer"></div>
 
-    <a *ngIf="loggedIn | async" mat-icon-button [routerLink]="['cart']">
-      <mat-icon>shopping_cart</mat-icon>
+    <a *ngIf="loggedIn | async" mat-icon-button (click)="goToCart()">
+      <mat-icon *ngIf="cart$ | async as cart" matBadge="{{cart.products.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
     </a>
 
   </mat-toolbar>
@@ -20,9 +20,9 @@
         <a mat-list-item [routerLink]="['/']">Homepage</a>
         <a mat-list-item [routerLink]="['login']">Login</a>
         <a mat-list-item [routerLink]="['register']">Register</a>
-        <mat-list-item (click)="logout()">
-          Logout
-        </mat-list-item>
+        <a mat-list-item *ngIf="loggedIn | async" [routerLink]="['cart']">Register</a>
+        <mat-list-item *ngIf="loggedIn | async" (click)="goToCart()" >My Cart</mat-list-item>
+        <mat-list-item (click)="logout()">Logout</mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 

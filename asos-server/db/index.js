@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_HOST = "localhost";
+const DB_HOST = "192.168.99.100";
 const DB_PORT = 27017;
 const DB_NAME = "admin";
 

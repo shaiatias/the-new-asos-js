@@ -1,13 +1,13 @@
 
-export type ProductDepartment = 
+export type ProductDepartment =
   "shirts";
 
 export interface IProduct {
-    id: number,
-    name: string,
-    imageUrl: string,
-    price: string,
-    description: string,
-    department: ProductDepartment
-  }
-  
+  _id: string,
+  name: string,
+  imageUrl: string,
+  price: number,
+  description: string,
+  department: ProductDepartment
+}
+

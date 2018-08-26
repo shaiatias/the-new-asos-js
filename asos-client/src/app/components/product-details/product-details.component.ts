@@ -3,7 +3,7 @@ import { CartService } from '../../services/cart/cart.service';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../services/products/products.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from "../../models/product";
 import { MatBottomSheet } from '@angular/material';
 
@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productsService: ProductsService,
     private cartService: CartService,
     private bottomSheet: MatBottomSheet
@@ -39,7 +40,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(amount: number) {
-    this.cartService.addToCart(this.product, amount);
+    this.cartService.addToCart(this.product, amount)
+    .then((res)=>{this.router.navigate(['/cart'])});
   }
 
   likeItem() {

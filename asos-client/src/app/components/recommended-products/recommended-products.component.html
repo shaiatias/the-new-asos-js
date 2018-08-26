@@ -1,9 +1,14 @@
+<p>
+  <input #query (keyup)="filter(query.value)" type="text"
+  class="form-control" placeholder="Search...">
+</p>
+
 <div class="wrapper">
-  <mat-card *ngFor="let item of recommended">
+  <mat-card *ngFor="let item of filteredProducts">
     <img mat-card-image [src]="item?.imageUrl" [alt]="item?.description">
     <mat-card-actions align="end">
       <button mat-button [routerLink]="['/department/', item?.department]">MORE {{item?.department}}</button>
-      <button mat-button [routerLink]="['/product/', item?.id]">BUY</button>
+      <button mat-button [routerLink]="['/product/', item?._id]">BUY</button>
     </mat-card-actions>
   </mat-card>
 </div>

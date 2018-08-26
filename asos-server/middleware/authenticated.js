@@ -1,5 +1,5 @@
 
-const authenticatedUser = (opt) => (req, res, next) => {
+const authenticatedUser = (opt = {}) => (req, res, next) => {
 
     if (req && req.session && req.session.user) {
         next();
