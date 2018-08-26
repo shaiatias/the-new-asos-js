@@ -1,8 +1,8 @@
 export class PaymentDetails {
-
-	firstName?: string;
-	lastName?: string;
+	name?: string;
 	cardNumber?: string;
+	expireMonth?: string;
+	expireYear?: string;
 	cvv?: string;
 	address?: string;
 }

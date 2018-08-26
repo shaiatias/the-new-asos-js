@@ -1,5 +1,5 @@
 const {CartService} = require("../services/cart.service");
-const {OrderService} = require("../services/orders.service");
+const {OrdersService} = require("../services/orders.service");
 
 class CartController {
 
@@ -63,15 +63,15 @@ class CartController {
     static async payCart(req, res) {
 
         // get request parameters
-        const {user, payment} = req.body;
-
+        const {user} = req.body;
+        const {paymentDetails} = user;
 
         try {
 
-            const cart = await CartService.getCartByUserId(req.session.userId);
+            const cart = await CartService.getCartByUserId(req.session.user._id);
 
             //create an order (history of orders)
-            const order = await OrderService.createOrder(user, cart, payment);
+            const order = await OrdersService.createOrder(user, cart, paymentDetails);
 
             //empty the cart 
             await CartService.cleanCart(req.session.user);

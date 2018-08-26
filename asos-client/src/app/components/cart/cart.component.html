@@ -46,34 +46,41 @@
 
 					<div>
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.firstName" type="text"
-								   placeholder="First name" required>
-							<div *ngIf="false" class="invalid-feedback"> Username is required</div>
-						</mat-form-field>
-						<br>
-
-						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.lastName" placeholder="Last name"
-								   name="lastName" required>
-							<div *ngIf="false" class="invalid-feedback">Last name is required</div>
+							<input matInput [(ngModel)]="user?.paymentDetails.name" type="text"
+								   placeholder="Name On Card" required>
+							<div *ngIf="nameMissing" class="invalid-feedback"> Username is required</div>
 						</mat-form-field>
 						<br>
 
 						<mat-form-field>
 							<input matInput [(ngModel)]="user?.paymentDetails.address" placeholder="Address"
-								   name="adress" required>
-							<div *ngIf="false" class="invalid-feedback">Address is required</div>
+								   name="address" required>
+							<div *ngIf="addressMissing" class="invalid-feedback">Address is required</div>
 						</mat-form-field>
 						<br>
 
 						<mat-form-field>
 							<input matInput [(ngModel)]="user?.paymentDetails.cardNumber"
 								   placeholder="Credit Card number" name="cardNumber" required>
-							<div *ngIf="false" class="invalid-feedback">Credit Card number is required</div>
+							<div *ngIf="cardMissing" class="invalid-feedback">Credit Card number is required</div>
 						</mat-form-field>
 						<br>
+
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.cvv" placeholder="cvv" type="password"
+							<input matInput [(ngModel)]="user?.paymentDetails.expireMonth" placeholder="MM" type="text"
+								   name="expireMonth" required>
+							<div *ngIf="expireMonthMissing" class="invalid-feedback">Cvv is required</div>
+						</mat-form-field>
+
+						<mat-form-field>
+							<input matInput [(ngModel)]="user?.paymentDetails.expireYear" placeholder="YYYY" type="text"
+								   name="expireYear" required>
+							<div *ngIf="expireYearMissing" class="invalid-feedback">Cvv is required</div>
+						</mat-form-field>
+						<br>
+
+						<mat-form-field>
+							<input matInput [(ngModel)]="user?.paymentDetails.cvv" placeholder="cvv" type="text"
 								   name="cvv" required>
 							<div *ngIf="cvvMissing" class="invalid-feedback">Cvv is required</div>
 						</mat-form-field>

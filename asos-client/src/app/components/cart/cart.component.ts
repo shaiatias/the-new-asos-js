@@ -20,11 +20,12 @@ export class CartComponent implements OnInit {
 	public cart$: Observable<ICartGroup>;
 	public user: User = new User();
 	public submited = false;
-	fNameMissing = false;
-	lNameMissing = false;
+	nameMissing = false;
 	addressMissing = false;
 	cardMissing = false;
 	cvvMissing = false;
+	expireMonthMissing = false;
+	expireYearMissing = false;
 
 	constructor(
 		private cartService: CartService,
@@ -78,17 +79,19 @@ export class CartComponent implements OnInit {
 
 	pay(cartId) {
 		this.submited = true;
-		let valid = this.validateDetails(this.user);
+		const valid = this.validateDetails(this.user);
+
 		if (!valid) {
 			this.submited = false;
 			alert('Missing mandatory fields');
 		}
 
-		this.cartService.pay(this.user, cartId).then(() => {
-			this.submited = false;
-			//go to orders page
-			this.router.navigate(['/my-orders']);
-		});
+		this.cartService
+			.pay(this.user, cartId)
+			.then(() => {
+				this.submited = false;
+				this.router.navigate(['/my-orders']);
+			});
 
 
 	}
@@ -96,23 +99,22 @@ export class CartComponent implements OnInit {
 	validateDetails(user: User) {
 		let res = true;
 
-		if (user.paymentDetails.firstName == '') {
+		if (user.paymentDetails.name === '') {
 			res = false;
-			this.fNameMissing = true;
-		}
-		else if (user.paymentDetails.lastName == '') {
-			res = false;
-			this.lNameMissing = true;
-		}
-		else if (user.paymentDetails.address == '') {
+			this.nameMissing = true;
+		} else if (user.paymentDetails.address === '') {
 			res = false;
 			this.addressMissing = true;
-		}
-		else if (user.paymentDetails.cardNumber == '') {
+		} else if (user.paymentDetails.cardNumber === '') {
 			res = false;
 			this.cardMissing = true;
-		}
-		else if (user.paymentDetails.cvv == '') {
+		} else if (user.paymentDetails.expireMonth === '') {
+			res = false;
+			this.expireMonthMissing = true;
+		} else if (user.paymentDetails.expireYear === '') {
+			res = false;
+			this.expireYearMissing = true;
+		} else if (user.paymentDetails.cvv === '') {
 			res = false;
 			this.cvvMissing = true;
 		}
