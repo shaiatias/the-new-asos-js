@@ -40,7 +40,7 @@ function startServer() {
 }
 
 initConnection()
-    // .then(fillDb)
+    .then(fillDb)
     .then(startServer)
     .catch(err => {
         console.error(err);

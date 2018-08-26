@@ -1,6 +1,7 @@
 const {User} = require("./users");
 const {Product} = require("./products");
 const {Cart} = require("./cart");
+const {Order} = require("./orders");
 
 async function fillDb() {
 
@@ -85,10 +86,31 @@ async function fillDb() {
         }
     ];
 
-
     for (const cart of carts) {
         await Cart.create(cart).catch(err => console.error(err));
     }
+
+    const orders = [
+        {
+            user: (await User.findOne({email: "customer1@asos.com"}).exec())._id,
+            products: [
+                (await Product.findOne({name: "t shirt1"}).exec())._id,
+                (await Product.findOne({name: "t shirt2"}).exec())._id
+            ],
+            chargeResult: {
+                amount: 50,
+                chargeDate: new Date(),
+                transactionId: Math.floor(Math.random() * 100000)
+            },
+            createdDate: new Date(),
+            totalPrice: 50
+        }
+    ];
+
+    for (const order of orders) {
+        await Order.create(order).catch(err => console.error(err));
+    }
+
 }
 
 module.exports = {fillDb};
