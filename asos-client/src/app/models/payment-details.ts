@@ -1,8 +1,8 @@
-export class PaymentDetails{
+export class PaymentDetails {
 
-    firstName?: string;
-    lastName?: string;
-    cardNumber?: string;
-    cvv?: string;
-    address?: string;
+	firstName?: string;
+	lastName?: string;
+	cardNumber?: string;
+	cvv?: string;
+	address?: string;
 }
