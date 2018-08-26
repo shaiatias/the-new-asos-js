@@ -1,4 +1,4 @@
-const { UsersService } = require("../services/users.service")
+const {UsersService} = require("../services/users.service")
 
 class UsersController {
 
@@ -7,7 +7,7 @@ class UsersController {
         const user = req.session.user;
 
         if (!user) {
-            return res.status(401).json({ message: "unauthorized" });
+            return res.status(401).json({message: "unauthorized"});
         }
 
         else {
@@ -44,13 +44,13 @@ class UsersController {
             }
 
             // get username and password
-            const { username, password } = req.body;
+            const {username, password} = req.body;
 
             // find user in db
             const user = await UsersService.authenticate(username, password);
 
             if (!user) {
-                return res.status(404).json({ message: "user is not found" })
+                return res.status(404).json({message: "user is not found"})
             }
 
             else {
@@ -64,7 +64,7 @@ class UsersController {
 
         catch (e) { // unexpected error
             console.error("unexpected error in login", e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
     }
 
@@ -80,11 +80,11 @@ class UsersController {
 
             // check if email or username is already in use
             if (!await UsersService.usernameIsAvailable(req.body.username)) {
-                return res.status(400).json({ message: "username is already in use" });
+                return res.status(400).json({message: "username is already in use"});
             }
 
             if (!await UsersService.emailIsAvailable(req.body.email)) {
-                return res.status(400).json({ message: "email is already in use" });
+                return res.status(400).json({message: "email is already in use"});
             }
 
             // add the user
@@ -96,11 +96,11 @@ class UsersController {
             return res.json(user);
         }
         catch (e) {
-            
+
             console.error(e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
     }
 }
 
-module.exports = { UsersController };
+module.exports = {UsersController};

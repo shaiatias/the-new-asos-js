@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
@@ -46,4 +45,4 @@ UserSchema.pre('save', function (next) {
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = { User, UserSchema };
+module.exports = {User, UserSchema};

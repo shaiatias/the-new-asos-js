@@ -1,4 +1,3 @@
-
 // const products = [
 //     {
 //       id: 1,
@@ -42,7 +41,7 @@
 //     }
 //   ];
 
-const { ProductsService } = require("../services/products.service")
+const {ProductsService} = require("../services/products.service")
 
 class ProductsController {
 
@@ -72,4 +71,4 @@ class ProductsController {
 }
 
 
-module.exports = { ProductsController };
+module.exports = {ProductsController};

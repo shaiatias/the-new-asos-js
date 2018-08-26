@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const { check } = require("express-validator/check");
+const {Router} = require("express");
+const {check} = require("express-validator/check");
 
-const { rejectInvalidRequest } = require("../middleware/rejectInvalidRequests");
-const { CartController } = require("../controllers/cart.controller");
-const { authenticatedUser } = require("../middleware/authenticated");
+const {rejectInvalidRequest} = require("../middleware/rejectInvalidRequests");
+const {CartController} = require("../controllers/cart.controller");
+const {authenticatedUser} = require("../middleware/authenticated");
 
 const router = Router();
 

@@ -1,14 +1,31 @@
-
-const { User } = require("./users");
-const { Product } = require("./products");
-const { Cart } = require("./cart");
+const {User} = require("./users");
+const {Product} = require("./products");
+const {Cart} = require("./cart");
 
 async function fillDb() {
 
     const users = [
-        { username: "customer1", email: "customer1@asos.com", name: "customer 1", password: "123456", roles: ["customer"] },
-        { username: "seller1", email: "seller1@asos.com", name: "seller 1", password: "123456", roles: ["customer", "seller"] },
-        { username: "admin1", email: "admin1@asos.com", name: "admin 1", password: "123456", roles: ["customer", "seller", "admin"] },
+        {
+            username: "customer1",
+            email: "customer1@asos.com",
+            name: "customer 1",
+            password: "123456",
+            roles: ["customer"]
+        },
+        {
+            username: "seller1",
+            email: "seller1@asos.com",
+            name: "seller 1",
+            password: "123456",
+            roles: ["customer", "seller"]
+        },
+        {
+            username: "admin1",
+            email: "admin1@asos.com",
+            name: "admin 1",
+            password: "123456",
+            roles: ["customer", "seller", "admin"]
+        },
     ];
 
     const products = [
@@ -59,10 +76,10 @@ async function fillDb() {
 
     const carts = [
         {
-            user: (await User.findOne({ email: "customer1@asos.com" }).exec())._id,
+            user: (await User.findOne({email: "customer1@asos.com"}).exec())._id,
             products: [
-                (await Product.findOne({ name: "t shirt1" }).exec())._id,
-                (await Product.findOne({ name: "t shirt2" }).exec())._id
+                (await Product.findOne({name: "t shirt1"}).exec())._id,
+                (await Product.findOne({name: "t shirt2"}).exec())._id
             ],
             totalPrice: 0
         }
@@ -74,4 +91,4 @@ async function fillDb() {
     }
 }
 
-module.exports = { fillDb };
+module.exports = {fillDb};

@@ -1,4 +1,4 @@
-const { Product } = require("../db/products");
+const {Product} = require("../db/products");
 
 class ProductsService {
 
@@ -11,4 +11,4 @@ class ProductsService {
     }
 }
 
-module.exports = { ProductsService };
+module.exports = {ProductsService};
