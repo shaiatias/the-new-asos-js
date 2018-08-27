@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {IProduct} from '../../models/product';
@@ -9,7 +10,7 @@ import {Observable} from 'rxjs';
 export class ProductsService {
 
 	constructor(
-		private http: HttpClient) {
+		private http: HttpClient, private router: Router) {
 	}
 
 	getRecommendedProducts(): Observable<any> {
@@ -23,7 +24,23 @@ export class ProductsService {
 	likeItem(product: IProduct) {
 
 	}
-	create(product: IProduct){
-		
+	async create(product: IProduct){
+		const body = {product};
+
+		try{
+			debugger;
+			return  this.http.post('/api/products/create', body).toPromise();
+		}
+		catch (err) {
+
+			if (err.status === 401) {
+				this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.routerState.snapshot.url}});
+			}
+
+			else {
+				throw err;
+			}
+		}
 	}
+
 }

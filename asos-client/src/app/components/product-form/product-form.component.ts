@@ -26,10 +26,13 @@ export class ProductFormComponent implements OnInit {
 
   save(product){
     console.log("product", product);
+    debugger;
+   this.productsService.create(product).then((res)=> {
+     debugger;
+     this.router.navigate(['/'])
+    });
 
-   this.productsService.create(product);
-
-    this.router.navigate(['/']);
+    
   }
 
 }
