@@ -1,0 +1,13 @@
+.card{
+    margin-bottom: 15px;
+}
+
+img.card-img-top{
+    height: 400px;
+    overflow: hidden;
+    width: auto;
+}
+
+.card-footer{
+    padding: 0;
+}

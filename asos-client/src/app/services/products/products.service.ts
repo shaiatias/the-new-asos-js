@@ -23,4 +23,7 @@ export class ProductsService {
 	likeItem(product: IProduct) {
 
 	}
+	create(product: IProduct){
+		
+	}
 }

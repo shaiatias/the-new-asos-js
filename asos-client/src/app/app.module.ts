@@ -1,3 +1,4 @@
+import { DepartementService } from './services/departement/departement.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
@@ -41,6 +42,7 @@ import {ShareProductComponent} from './components/share-product/share-product.co
 import {RegisterComponent} from './components/register/register.component';
 import {AlertComponent} from './components/alert/alert.component';
 import {MyOrdersComponent} from './components/my-orders/my-orders.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 @NgModule({
 	declarations: [
@@ -55,7 +57,8 @@ import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 		ShareProductComponent,
 		RegisterComponent,
 		AlertComponent,
-		MyOrdersComponent
+		MyOrdersComponent,
+		ProductFormComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -85,7 +88,8 @@ import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 		AuthenticationService,
 		CartService,
 		ProductsService,
-		UserService
+		UserService,
+		DepartementService
 
 	],
 	entryComponents: [AppComponent, ShareProductComponent],

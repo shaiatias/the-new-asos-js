@@ -20,10 +20,11 @@
 		<mat-sidenav class="sidenav" #drawer [mode]="'over'">
 			<mat-nav-list>
 				<a mat-list-item [routerLink]="['/']">Homepage</a>
-				<a mat-list-item [routerLink]="['login']">Login</a>
+				<a mat-list-item *ngIf="! loggedIn | async" [routerLink]="['login']">Login</a>
 				<a mat-list-item [routerLink]="['register']">Register</a>
-				<a mat-list-item *ngIf="loggedIn | async" [routerLink]="['cart']">Register</a>
+				<a mat-list-item *ngIf="! loggedIn | async" [routerLink]="['cart']">Register</a>
 				<mat-list-item *ngIf="loggedIn | async" (click)="goToCart()">My Cart</mat-list-item>
+				<mat-list-item *ngIf="loggedIn | async" [routerLink]="['products/new']" >Add product</mat-list-item>
 				<mat-list-item (click)="logout()">Logout</mat-list-item>
 			</mat-nav-list>
 		</mat-sidenav>

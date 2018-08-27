@@ -1,3 +1,4 @@
+import { ProductFormComponent } from './components/product-form/product-form.component';
 import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ProductDetailsComponent} from './components/product-details/product-details.component';
@@ -38,5 +39,10 @@ export const routes: Routes = [
 	{
 		path: 'product/:id',
 		component: ProductDetailsComponent
-	}
+	},
+	{
+        path: 'products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard]
+      },
 ];
