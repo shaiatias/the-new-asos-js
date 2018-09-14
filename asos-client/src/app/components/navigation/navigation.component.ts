@@ -16,6 +16,7 @@ export class NavigationComponent {
 
 	loggedIn$: Observable<boolean> = this.auth.isAuthenticated$();
 	isAdmin$: Observable<boolean> = this.auth.isAdmin$();
+	isSeller$: Observable<boolean> = this.auth.isSeller$();
 
 	cart$: Observable<ICart>;
 
