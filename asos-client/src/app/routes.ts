@@ -1,3 +1,5 @@
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -29,9 +31,19 @@ export const routes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
+		path: 'order/:id',
+		component: OrderDetailsComponent,
+		canActivate: [AuthGuard]
+	},
+	{
 		path: 'my-orders',
 		component: MyOrdersComponent,
 		canActivate: [AuthGuard]
+	},
+	{
+		path: 'all-orders',
+		component: AllOrdersComponent,
+		canActivate: [AuthGuard, GuardForRole("admin")]
 	},
 	{
 		path: 'department/:name',

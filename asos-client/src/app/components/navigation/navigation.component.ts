@@ -1,8 +1,6 @@
 import { CartService } from './../../services/cart/cart.service';
 import { Observable } from 'rxjs';
-import { map } from "rxjs/operators";
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { ICart } from '../../models/cart';

@@ -26,7 +26,9 @@ import {
 	MatMenuModule,
 	MatSidenavModule,
 	MatSnackBarModule,
-	MatToolbarModule
+	MatToolbarModule,
+	MatPaginatorModule,
+	MatTableModule
 } from '@angular/material';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {LayoutModule} from '@angular/cdk/layout';
@@ -43,6 +45,10 @@ import {RegisterComponent} from './components/register/register.component';
 import {AlertComponent} from './components/alert/alert.component';
 import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { OrdersService } from './services/orders/orders.service';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 @NgModule({
 	declarations: [
@@ -58,7 +64,10 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 		RegisterComponent,
 		AlertComponent,
 		MyOrdersComponent,
-		ProductFormComponent
+		ProductFormComponent,
+		OrdersListComponent,
+		AllOrdersComponent,
+		OrderDetailsComponent
 	],
 	imports: [
 		HttpClientModule,
@@ -80,6 +89,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 		MatChipsModule,
 		MatBadgeModule,
 		MatSnackBarModule,
+		MatPaginatorModule, 
+		MatTableModule,
 		BrowserAnimationsModule
 	],
 	providers: [
@@ -89,7 +100,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 		CartService,
 		ProductsService,
 		UserService,
-		DepartementService
+		DepartementService,
+		OrdersService
 
 	],
 	entryComponents: [AppComponent, ShareProductComponent],

@@ -8,11 +8,15 @@ export class OrdersService {
 	constructor(private http: HttpClient) {
 	}
 
-	getAll() {
-		return this.http.get<IOrder[]>(`/api/orders`);
+	getMyOrder() {
+		return this.http.get<IOrder[]>(`/api/orders/my-orders`);
 	}
 
-	getById(id: number) {
-		return this.http.get(`/api/orders/` + id);
+	getAll() {
+		return this.http.get<IOrder[]>(`/api/orders/all-orders`);
+	}
+
+	getDetailsById(id: string) {
+		return this.http.get<IOrder>(`/api/orders/details/${id}`);
 	}
 }
