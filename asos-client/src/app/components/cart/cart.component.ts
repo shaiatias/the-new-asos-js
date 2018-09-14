@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
 		private router: Router,
 		private authenticationService: AuthenticationService
 	) {
-		this.user = JSON.parse(this.authenticationService.getUser());
+		this.user = this.authenticationService.getUser();
 		this.user.paymentDetails = {};
 		console.log('user', this.user);
 	}

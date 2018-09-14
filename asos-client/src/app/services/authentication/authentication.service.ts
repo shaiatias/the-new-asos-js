@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -55,9 +56,8 @@ export class AuthenticationService {
 			});
 	}
 
-	getUser() {
-		let user = localStorage.getItem('currentUser');
-		return user;
+	getUser(): User | null {
+		return JSON.parse(localStorage.getItem("currentUser"));
 	}
 
 	private clearStorage() {
