@@ -23,6 +23,8 @@
 				<a mat-list-item *ngIf="!(loggedIn | async)" [routerLink]="['login']">Login</a>
 				<a mat-list-item *ngIf="!(loggedIn | async)" [routerLink]="['register']">Register</a>
 				<mat-list-item *ngIf="loggedIn | async" (click)="goToCart()">My Cart</mat-list-item>
+				<a mat-list-item *ngIf="loggedIn | async" [routerLink]="['my-orders']">My orders</a>
+				<a mat-list-item *ngIf="isAdmin | async" [routerLink]="['all-orders']">All orders</a>
 				<mat-list-item *ngIf="loggedIn | async" [routerLink]="['products/new']" >Add product</mat-list-item>
 				<mat-list-item *ngIf="loggedIn | async" (click)="logout()">Logout</mat-list-item>
 			</mat-nav-list>
