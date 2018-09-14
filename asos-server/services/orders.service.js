@@ -21,7 +21,7 @@ class OrdersService {
         const {name, cardNumber, expireMonth, expireYear, cvv} = payment;
         const {totalPrice: amount} = cart;
 
-        const chargeResult = this.chargeClient(name, cardNumber, expireMonth, expireYear, cvv, amount);
+        const chargeResult = await this.chargeClient(name, cardNumber, expireMonth, expireYear, cvv, amount);
 
         return await Order.create({
             user: user._id,
