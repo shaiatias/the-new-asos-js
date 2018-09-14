@@ -1,8 +1,8 @@
 import { User } from './../../models/user';
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,6 +19,22 @@ export class AuthenticationService {
 		return this.loggedIn.asObservable();
 	}
 
+	isAdmin$(): Observable<boolean> {
+		return this.loggedIn.asObservable()
+			.pipe(
+				map(() => this.getUser()),
+				map(user => user && user.roles.includes("admin"))
+			);
+	}
+
+	isSeller$(): Observable<boolean> {
+		return this.loggedIn.asObservable()
+			.pipe(
+				map(() => this.getUser()),
+				map(user => user && user.roles.includes("seller"))
+			);
+	}
+
 	isAuthenticated(): boolean {
 		let user = localStorage.getItem('currentUser');
 		return user != null;
@@ -26,21 +42,21 @@ export class AuthenticationService {
 
 	login(username: string, password: string) {
 
-		return this.http.post<any>('/api/users/login', {username, password})
+		return this.http.post<any>('/api/users/login', { username, password })
 			.pipe(
 				tap(user => {
 
-						// login successful if there's a jwt token in the response
-						if (user) {
+					// login successful if there's a jwt token in the response
+					if (user) {
 
-							// store user details and jwt token in local storage to keep user logged in between page refreshes
-							localStorage.setItem('currentUser', JSON.stringify(user));
-						}
-
-						// update loggedIn obervable
-						this.loggedIn.next(this.isAuthenticated());
-
+						// store user details and jwt token in local storage to keep user logged in between page refreshes
+						localStorage.setItem('currentUser', JSON.stringify(user));
 					}
+
+					// update loggedIn obervable
+					this.loggedIn.next(this.isAuthenticated());
+
+				}
 				));
 	}
 

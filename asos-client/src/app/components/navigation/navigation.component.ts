@@ -14,17 +14,12 @@ import { ICart } from '../../models/cart';
 })
 export class NavigationComponent {
 
-	loggedIn: Observable<boolean> = this.auth.isAuthenticated$();
-	
-	isAdmin: Observable<boolean> = this.auth.isAuthenticated$().pipe(
-		map(() => this.auth.getUser()),
-		map(user => user && user.roles.includes("admin"))
-	);
+	loggedIn$: Observable<boolean> = this.auth.isAuthenticated$();
+	isAdmin$: Observable<boolean> = this.auth.isAdmin$();
 
 	cart$: Observable<ICart>;
 
 	constructor(
-		private http: HttpClient,
 		private router: Router,
 		private auth: AuthenticationService,
 		private cartService: CartService) {
