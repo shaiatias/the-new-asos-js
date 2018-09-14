@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {IProduct} from '../../models/product';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IProduct } from '../../models/product';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,17 +24,17 @@ export class ProductsService {
 	likeItem(product: IProduct) {
 
 	}
-	async create(product: IProduct){
-		const body = {product};
+	async create(product: IProduct) {
 
-		try{
-			debugger;
-			return  this.http.post('/api/products/create', body).toPromise();
+		const body = { product };
+
+		try {
+			return this.http.post('/api/products/create', body).toPromise();
 		}
 		catch (err) {
 
 			if (err.status === 401) {
-				this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.routerState.snapshot.url}});
+				this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.routerState.snapshot.url } });
 			}
 
 			else {

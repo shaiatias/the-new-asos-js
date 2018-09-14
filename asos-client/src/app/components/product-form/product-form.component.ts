@@ -13,26 +13,22 @@ import { Router } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   departments$: Observable<any>;
-  product: IProduct ;
+  product: IProduct = {};
 
   constructor(private departmentService: DepartementService, private productsService: ProductsService, private router: Router) {
-     this.product= {}
-    }
+  }
 
   ngOnInit() {
-
-    this.departments$ = this.departmentService.getAllDepartments()
+    this.departments$ = this.departmentService.getAllDepartments();
   }
 
-  save(product){
-    console.log("product", product);
-    debugger;
-   this.productsService.create(product).then((res)=> {
-     debugger;
-     this.router.navigate(['/'])
-    });
+  save(product) {
 
+    console.log("product", product);
+
+    this.productsService.create(product).then((res) => {
+      this.router.navigate(['/'])
+    });
     
   }
-
 }
