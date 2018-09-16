@@ -1,3 +1,4 @@
+import { IOrderDetails } from './../../models/order';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IOrder} from '../../models/order';
@@ -17,6 +18,6 @@ export class OrdersService {
 	}
 
 	getDetailsById(id: string) {
-		return this.http.get<IOrder>(`/api/orders/details/${id}`);
+		return this.http.get<IOrderDetails>(`/api/orders/details/${id}`);
 	}
 }

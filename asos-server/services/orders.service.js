@@ -47,6 +47,7 @@ class OrdersService {
         const order = await Order.findOne({
             _id: id
         });
+        
         await order
             .populate("user")
             .populate("products")

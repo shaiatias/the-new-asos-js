@@ -1,3 +1,4 @@
+import { IOrderDetails } from './../../models/order';
 import { OrdersService } from './../../services/orders/orders.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  order$: Observable<IOrder>;
+  //order$: Observable<IOrder>; IOrderDetails
+  order$: Observable<IOrderDetails>; IOrderDetails
 
   constructor(
     private route: ActivatedRoute,
