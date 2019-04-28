@@ -1,47 +1,48 @@
-const {ProductsService} = require("../services/products.service")
+const { ProductsService } = require("../services/products.service");
 
 class ProductsController {
+  static async getAll(req, res) {
+    const products = await ProductsService.getAll();
+    res.json(products);
+  }
 
-    static async getAll(req, res) {
-        const products = await ProductsService.getAll();
-        res.json(products);
+  static async getById(req, res) {
+    const found = await ProductsService.findById(req.params.id);
+
+    if (found) {
+      res.json(found);
+    } else {
+      res.status(404).json({});
     }
+  }
 
-    static async getById(req, res) {
-
-        const found = await ProductsService.findById(req.params.id);
-
-        if (found) {
-            res.json(found);
-        }
-
-        else {
-            res.status(404).json({});
-        }
+  static async getByDepartment(req, res) {
+    const found = await ProductsService.findByDepartment(req.params.department);
+    if (found) {
+      res.json(found);
+    } else {
+      res.json([]);
     }
+  }
 
-    static async getRecommended(req, res) {
-        const products = await ProductsService.getAll();
-        res.json(products);
+  static async getRecommended(req, res) {
+    const products = await ProductsService.getAll();
+    res.json(products);
+  }
+
+  static async create(req, res) {
+    const product = req.body.product;
+    const productAdded = await ProductsService.create(product);
+
+    if (productAdded) {
+      res.json(productAdded);
+    } else {
+      res.status(404).json({});
     }
-
-    static async create(req, res){
-        const product = req.body.product;
-        const productAdded = await ProductsService.create(product);
-
-        if (productAdded) {
-            res.json(productAdded);
-        }
-
-        else {
-            res.status(404).json({});
-        }
-    }
-
+  }
 }
 
-
-module.exports = {ProductsController};
+module.exports = { ProductsController };
 
 // const products = [
 //     {
