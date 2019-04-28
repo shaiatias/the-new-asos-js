@@ -1,64 +1,84 @@
+import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private loggedIn = new BehaviorSubject(null);
+	private loggedIn = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) {
-    this.loggedIn.next(this.isAuthenticated());
-  }
+	constructor(private http: HttpClient) {
+		this.loggedIn.next(this.isAuthenticated());
+	}
 
-  isAuthenticated$(): Observable<boolean> {
-    return this.loggedIn.asObservable();
-  }
+	isAuthenticated$(): Observable<boolean> {
+		return this.loggedIn.asObservable();
+	}
 
-  isAuthenticated(): boolean {
-    let user = localStorage.getItem('currentUser');
-    return user != null;
-  }
+	isAdmin$(): Observable<boolean> {
+		return this.loggedIn.asObservable()
+			.pipe(
+				map(() => this.getUser()),
+				map(user => user && user.roles.includes("admin"))
+			);
+	}
 
-  login(username: string, password: string) {
+	isSeller$(): Observable<boolean> {
+		return this.loggedIn.asObservable()
+			.pipe(
+				map(() => this.getUser()),
+				map(user => user && user.roles.includes("seller"))
+			);
+	}
 
-    return this.http.post<any>('/api/users/login', { username, password })
-      .pipe(
-        tap(user => {
+	isAuthenticated(): boolean {
+		let user = localStorage.getItem('currentUser');
+		return user != null;
+	}
 
-          // login successful if there's a jwt token in the response
-          if (user) {
+	login(username: string, password: string) {
 
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-          }
+		return this.http.post<any>('/api/users/login', { username, password })
+			.pipe(
+				tap(user => {
 
-          // update loggedIn obervable
-          this.loggedIn.next(this.isAuthenticated());
+					// login successful if there's a jwt token in the response
+					if (user) {
 
-        }
-      ));
-  }
+						// store user details and jwt token in local storage to keep user logged in between page refreshes
+						localStorage.setItem('currentUser', JSON.stringify(user));
+					}
 
-  logout() {
+					// update loggedIn obervable
+					this.loggedIn.next(this.isAuthenticated());
 
-    return this.http.post("/api/users/logout", {})
-      .toPromise()
-      .then(() => { this.clearStorage() })
-      .then(() => { this.loggedIn.next(this.isAuthenticated()) });
-  }
+				}
+				));
+	}
 
-  private clearStorage() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
+	logout() {
 
-  getUser(){
-    let user = localStorage.getItem('currentUser');
-    return user;
-  }
+		return this.http.post('/api/users/logout', {})
+			.toPromise()
+			.then(() => {
+				this.clearStorage();
+			})
+			.then(() => {
+				this.loggedIn.next(this.isAuthenticated());
+			});
+	}
+
+	getUser(): User | null {
+		return JSON.parse(localStorage.getItem("currentUser"));
+	}
+
+	private clearStorage() {
+		// remove user from local storage to log user out
+		localStorage.removeItem('currentUser');
+	}
 
 }

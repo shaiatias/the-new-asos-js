@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const CartSchema = new mongoose.Schema({
@@ -22,11 +21,11 @@ const CartSchema = new mongoose.Schema({
 });
 
 CartSchema.pre('save', async function (next) {
-    const cart = this;
+    const self = this;
 
-    await cart.populate('products').execPopulate();
+    await self.populate('products').execPopulate();
 
-    cart.totalPrice = (cart.products || []).reduce((temp, item) => {
+    self.totalPrice = (self.products || []).reduce((temp, item) => {
         return temp + item.price;
     }, 0);
 
@@ -35,4 +34,4 @@ CartSchema.pre('save', async function (next) {
 
 const Cart = mongoose.model('Cart', CartSchema);
 
-module.exports = { Cart, CartSchema };
+module.exports = {Cart, CartSchema};

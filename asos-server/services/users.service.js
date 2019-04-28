@@ -1,12 +1,11 @@
-
 const bcrypt = require("bcrypt");
-const { User } = require("../db/users");
+const {User} = require("../db/users");
 
 class UsersService {
 
     static async authenticate(username, password) {
 
-        const user = await User.findOne({ username }).exec();
+        const user = await User.findOne({username}).exec();
 
         // user found
         if (user) {
@@ -31,7 +30,7 @@ class UsersService {
     }
 
     static async createUser(user, roles = ["customer"]) {
-        
+
         const u = new User({
             ...user,
             roles: roles
@@ -41,17 +40,17 @@ class UsersService {
     }
 
     static async usernameIsAvailable(username) {
-        
-        const found = await User.findOne({ username });
+
+        const found = await User.findOne({username});
         return !found;
     }
 
     static async emailIsAvailable(email) {
 
-        const found = await User.findOne({ email });
+        const found = await User.findOne({email});
         return !found;
     }
 
 }
 
-module.exports = { UsersService };
+module.exports = {UsersService};

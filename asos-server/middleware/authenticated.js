@@ -1,4 +1,3 @@
-
 const authenticatedUser = (opt = {}) => (req, res, next) => {
 
     if (req && req.session && req.session.user) {
@@ -10,8 +9,8 @@ const authenticatedUser = (opt = {}) => (req, res, next) => {
     }
 
     else {
-        res.status(401).json({ message: "Unauthorized" });
+        res.status(401).json({message: "Unauthorized"});
     }
 };
 
-module.exports = { authenticatedUser };
+module.exports = {authenticatedUser};

@@ -1,18 +1,17 @@
 
-
 .wrapper {
-    min-width: 100%;
-    min-height: 200px;
-    overflow-x: auto;
-    display: flex;
+	min-width: 100%;
+	min-height: 200px;
+	overflow-x: auto;
+	display: flex;
 }
 
 .mat-button {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .mat-card {
-    min-width: 200px;
-    margin: 10px;
+	min-width: 200px;
+	margin: 10px;
 }
 

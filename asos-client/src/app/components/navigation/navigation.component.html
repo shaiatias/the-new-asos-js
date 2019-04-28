@@ -1,35 +1,39 @@
 <div class="menu-container">
 
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="app-name">The New Asos</h1>
-    <div class="spacer"></div>
+	<mat-toolbar color="primary">
+		<button mat-icon-button (click)="drawer.toggle()">
+			<mat-icon>menu</mat-icon>
+		</button>
+		<h1 class="app-name">The New Asos</h1>
+		<div class="spacer"></div>
 
-    <a *ngIf="loggedIn | async" mat-icon-button (click)="goToCart()">
-      <mat-icon *ngIf="cart$ | async as cart" matBadge="{{cart.products.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
-    </a>
+		<a *ngIf="loggedIn$ | async" mat-icon-button (click)="goToCart()">
+			<mat-icon *ngIf="cart$ | async as cart" matBadge="{{cart.products.length}}" matBadgeColor="warn">
+				shopping_cart
+			</mat-icon>
+		</a>
 
-  </mat-toolbar>
+	</mat-toolbar>
 
-  <mat-sidenav-container class="sidenav-container">
+	<mat-sidenav-container class="sidenav-container">
 
-    <mat-sidenav class="sidenav" #drawer [mode]="'over'">
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="['/']">Homepage</a>
-        <a mat-list-item [routerLink]="['login']">Login</a>
-        <a mat-list-item [routerLink]="['register']">Register</a>
-        <a mat-list-item *ngIf="loggedIn | async" [routerLink]="['cart']">Register</a>
-        <mat-list-item *ngIf="loggedIn | async" (click)="goToCart()" >My Cart</mat-list-item>
-        <mat-list-item (click)="logout()">Logout</mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
+		<mat-sidenav class="sidenav" #drawer [mode]="'over'">
+			<mat-nav-list>
+				<a mat-list-item [routerLink]="['/']">Homepage</a>
+				<a mat-list-item *ngIf="!(loggedIn$ | async)" [routerLink]="['login']">Login</a>
+				<a mat-list-item *ngIf="!(loggedIn$ | async)" [routerLink]="['register']">Register</a>
+				<mat-list-item *ngIf="loggedIn$ | async" (click)="goToCart()">My Cart</mat-list-item>
+				<a mat-list-item *ngIf="loggedIn$ | async" [routerLink]="['my-orders']">My orders</a>
+				<a mat-list-item *ngIf="isAdmin$ | async" [routerLink]="['all-orders']">All orders</a>
+				<mat-list-item *ngIf="isSeller$ | async" [routerLink]="['products/new']" >Add product</mat-list-item>
+				<mat-list-item *ngIf="loggedIn$ | async" (click)="logout()">Logout</mat-list-item>
+			</mat-nav-list>
+		</mat-sidenav>
 
-    <mat-sidenav-content>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
+		<mat-sidenav-content>
+			<ng-content></ng-content>
+		</mat-sidenav-content>
 
-  </mat-sidenav-container>
+	</mat-sidenav-container>
 
 </div>

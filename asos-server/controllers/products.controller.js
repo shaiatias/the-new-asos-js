@@ -1,3 +1,47 @@
+const {ProductsService} = require("../services/products.service")
+
+class ProductsController {
+
+    static async getAll(req, res) {
+        const products = await ProductsService.getAll();
+        res.json(products);
+    }
+
+    static async getById(req, res) {
+
+        const found = await ProductsService.findById(req.params.id);
+
+        if (found) {
+            res.json(found);
+        }
+
+        else {
+            res.status(404).json({});
+        }
+    }
+
+    static async getRecommended(req, res) {
+        const products = await ProductsService.getAll();
+        res.json(products);
+    }
+
+    static async create(req, res){
+        const product = req.body.product;
+        const productAdded = await ProductsService.create(product);
+
+        if (productAdded) {
+            res.json(productAdded);
+        }
+
+        else {
+            res.status(404).json({});
+        }
+    }
+
+}
+
+
+module.exports = {ProductsController};
 
 // const products = [
 //     {
@@ -41,35 +85,3 @@
 //       description: "simple t shirt"
 //     }
 //   ];
-
-const { ProductsService } = require("../services/products.service")
-
-class ProductsController {
-
-    static async getAll(req, res) {
-        const products = await ProductsService.getAll();
-        res.json(products);
-    }
-
-    static async getById(req, res) {
-
-        const found = await ProductsService.findById(req.params.id);
-
-        if (found) {
-            res.json(found);
-        }
-
-        else {
-            res.status(404).json({});
-        }
-    }
-
-    static async getRecommended(req, res) {
-        const products = await ProductsService.getAll();
-        res.json(products);
-    }
-
-}
-
-
-module.exports = { ProductsController };

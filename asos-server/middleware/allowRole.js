@@ -1,5 +1,4 @@
-
-const { authenticatedUser } = require("./authenticated");
+const {authenticatedUser} = require("./authenticated");
 
 const allowRoleOnly = (role) => (req, res, next) => {
 
@@ -8,18 +7,18 @@ const allowRoleOnly = (role) => (req, res, next) => {
         const user = req.session.user;
 
         if (
-            user.roles && 
-            user.roles.includes && 
+            user.roles &&
+            user.roles.includes &&
             user.roles.includes(role)
         ) {
             next();
         }
 
         else {
-            res.status(403).json({ message: "forbidden" });
+            res.status(403).json({message: "forbidden"});
         }
-        
+
     })
 };
 
-module.exports = { allowRoleOnly };
+module.exports = {allowRoleOnly};

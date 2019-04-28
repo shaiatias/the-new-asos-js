@@ -1,11 +1,11 @@
-const { CartService } = require("../services/cart.service")
-const { UsersService } = require("../services/users.service")
+const {CartService} = require("../services/cart.service");
+const {OrdersService} = require("../services/orders.service");
 
 class CartController {
 
     static async addItem(req, res) {
         // get request parameters
-        const { product, amount } = req.body;
+        const {product, amount} = req.body;
         // const { user } = req.session.user;
 
         try {
@@ -18,14 +18,14 @@ class CartController {
 
         catch (e) {
             console.error("unexpected error in addItem", e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
     }
 
     static async removeItem(req, res) {
-        
+
         // get request parameters
-        const { product, amount } = req.body;
+        const {product, amount} = req.body;
 
         try {
 
@@ -37,55 +37,58 @@ class CartController {
 
         catch (e) {
             console.error("unexpected error in removeItem", e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
     }
 
-    static async removeAllItems(req, res){
-
-         // get request parameters
-         const { product} = req.body;
-
-         try {
- 
-             //find user cart in db and removing all items corresponding in products[]
-             const updatedCart = await CartService.removeAllItems(req.session.user, product);
- 
-             return res.json(updatedCart);
-         }
- 
-         catch (e) {
-             console.error("unexpected error in removeAllItems", e);
-             return res.status(500).json({ message: "unexpected error" });
-         }
-    }
-
-    static async payCart(req, res){
+    static async removeAllItems(req, res) {
 
         // get request parameters
-        const { user, cartId} = req.body;
+        const {product} = req.body;
 
         try {
 
-            //update the payment details of the user
+            //find user cart in db and removing all items corresponding in products[]
+            const updatedCart = await CartService.removeAllItems(req.session.user, product);
 
-            //create an order (history of orders)
-
-            //empty the cart 
-            const updatedCart = await CartService.cleanCart(req.session.user);
-            
-            //return the updated cart
             return res.json(updatedCart);
         }
 
         catch (e) {
             console.error("unexpected error in removeAllItems", e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
-   }
+    }
+
+    static async payCart(req, res) {
+
+        // get request parameters
+        const {user} = req.body;
+        const {paymentDetails} = user;
+
+        try {
+
+            const cart = await CartService.getCartByUserId(req.session.user._id);
+
+            //create an order (history of orders)
+            const order = await OrdersService.createOrder(user, cart, paymentDetails);
+
+            //empty the cart 
+            await CartService.cleanCart(req.session.user);
+
+            //return the updated cart
+            return res.json(order);
+        }
+
+        catch (e) {
+            console.error("unexpected error in removeAllItems", e);
+            return res.status(500).json({message: "unexpected error"});
+        }
+    }
+
     static async getCart(req, res) {
 
-        const { user } = req.session;
+        const {user} = req.session;
 
         try {
             const userCart = await CartService.getCartByUserId(user._id);
@@ -99,10 +102,10 @@ class CartController {
 
         catch (e) {
             console.error("unexpected error in addItem", e);
-            return res.status(500).json({ message: "unexpected error" });
+            return res.status(500).json({message: "unexpected error"});
         }
     }
 }
 
 
-module.exports = { CartController };
+module.exports = {CartController};

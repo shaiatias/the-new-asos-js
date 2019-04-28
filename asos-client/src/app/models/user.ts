@@ -1,12 +1,12 @@
-import { PaymentDetails } from "./payment-details";
+import {PaymentDetails} from './payment-details';
 
 export class User {
-    id: string;
-    username: string;
-    email: string;
-    name: string;
-    password: string;
-    passwordConfirm: string;
-    roles: string[]= [];
-    paymentDetails?: PaymentDetails = {};
+	id: string;
+	username: string;
+	email: string;
+	name: string;
+	password: string;
+	passwordConfirm: string;
+	roles: string[] = [];
+	paymentDetails?: PaymentDetails = {};
 }

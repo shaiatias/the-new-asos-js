@@ -1,0 +1,9 @@
+
+table {
+    width: 100%;
+}
+
+tr.mat-row:hover {
+    background: #f5f5f5;
+}
+  

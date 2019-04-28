@@ -1,0 +1,22 @@
+<h1>order details</h1>
+
+<div *ngIf ="order$ | async as order">
+  <p>The total amount of the order:{{ order.chargeResult.amount | currency:'USD':true}}</p>
+  <p>The id of the order:{{ order.chargeResult.transactionId}}</p>
+  <p>The creation date of the order:{{ order.createdDate | date}}</p>
+
+        <div class="wrapper">
+            <mat-card  *ngFor ="let product of order.products">
+              <img mat-card-image [src]="product?.imageUrl" [alt]="product?.description">
+              <mat-card-content>
+                  <span> Name: {{product.name}}</span>  
+                  <span> Price per unit: {{product.price | currency:'USD':true}}</span>  
+                <p> {{product.description}}</p>
+                </mat-card-content>
+            </mat-card>
+          </div>
+
+</div>
+
+
+

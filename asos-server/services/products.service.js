@@ -1,4 +1,4 @@
-const { Product } = require("../db/products");
+const {Product} = require("../db/products");
 
 class ProductsService {
 
@@ -9,6 +9,16 @@ class ProductsService {
     static findById(id) {
         return Product.findById(id).exec();
     }
+
+    static create(product){
+        try{
+            return Product.create(product);//.exec();
+
+        }
+        catch(Exception ){
+            console.error(e);
+        }
+    }
 }
 
-module.exports = { ProductsService };
+module.exports = {ProductsService};

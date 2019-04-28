@@ -17,7 +17,7 @@ const api = require("./api");
 const app = express();
  
 app.use(session({
-    store: new RedisStore({host: "192.168.99.100", port: 6379 }),
+    store: new RedisStore({host: "192.168.99.100", port: 6379 }),// store: new RedisStore({host: "localhost", port: 6379 }),
     secret: "shai",
     resave: false
 }));
@@ -40,7 +40,7 @@ function startServer() {
 }
 
 initConnection()
-    //.then(fillDb)
+    // .then(fillDb)
     .then(startServer)
     .catch(err => {
         console.error(err);
