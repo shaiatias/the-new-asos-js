@@ -2,33 +2,33 @@
 
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)" class="example-container">
 
-    <mat-form-field>
-        <input matInput placeholder="Username" formControlName="username" required>
-        <mat-error *ngIf="submitted && f.username.errors">Username is required</mat-error>
-    </mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Username" formControlName="username" required>
+		<mat-error *ngIf="submitted && f.username.errors">Username is required</mat-error>
+	</mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Name" formControlName="name" required>
-        <mat-error *ngIf="submitted && f.name.errors">Email is required</mat-error>
-    </mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Name" formControlName="name" required>
+		<mat-error *ngIf="submitted && f.name.errors">Email is required</mat-error>
+	</mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email" required>
-        <mat-error *ngIf="submitted && f.email.errors">Email is required</mat-error>
-    </mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Email" formControlName="email" required>
+		<mat-error *ngIf="submitted && f.email.errors">Email is required</mat-error>
+	</mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Password" type="password" formControlName="password" required>
-        <mat-error *ngIf="submitted && f.password.errors">Password is required</mat-error>
-    </mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Password" type="password" formControlName="password" required>
+		<mat-error *ngIf="submitted && f.password.errors">Password is required</mat-error>
+	</mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Password Confirmation" type="password" formControlName="passwordConfirm" required>
-        <mat-error *ngIf="submitted && f.passwordConfirm.errors">Password is required</mat-error>
-    </mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Password Confirmation" type="password" formControlName="passwordConfirm" required>
+		<mat-error *ngIf="submitted && f.passwordConfirm.errors">Password is required</mat-error>
+	</mat-form-field>
 
-    <div class="button-row">
-        <button  [disabled]="loading" mat-raised-button color="primary"  type="submit" value="Register">Register</button>
-    </div>
+	<div class="button-row">
+		<button [disabled]="loading" mat-raised-button color="primary" type="submit" value="Register">Register</button>
+	</div>
 
 </form>

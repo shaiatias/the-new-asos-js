@@ -1,15 +1,15 @@
-const { Cart } = require("../db/cart");
+const {Cart} = require("../db/cart");
 
 class CartService {
 
     static async getCartByUserId(id) {
-        const userCart = await Cart.findOne({ user: id }).exec();
+        const userCart = await Cart.findOne({user: id}).exec();
 
         if (userCart) {
             return userCart;
         }
         else {
-            return await Cart.create({ user: id, products: [] });
+            return await Cart.create({user: id, products: []});
         }
     }
 
@@ -37,7 +37,7 @@ class CartService {
         return userCart;
     }
 
-    
+
     static async removeAllItems(user, product) {
 
         const userCart = await this.getCartByUserId(user._id);
@@ -46,8 +46,8 @@ class CartService {
 
         if (found) {
             found.forEach(item => {
-               let index= userCart.products.indexOf(item);
-               userCart.products.splice(index, 1);
+                let index = userCart.products.indexOf(item);
+                userCart.products.splice(index, 1);
             });
 
             return await userCart.save();
@@ -60,11 +60,11 @@ class CartService {
 
         const userCart = await this.getCartByUserId(user._id);
 
-        userCart.products= [];
+        userCart.products = [];
 
         return await userCart.save();
-        
+
     }
 }
 
-module.exports = { CartService };
+module.exports = {CartService};

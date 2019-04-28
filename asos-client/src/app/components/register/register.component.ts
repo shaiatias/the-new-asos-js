@@ -1,65 +1,67 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { UserService } from '../../services/user/user.service';
-import { AlertService } from '../../services/alerts/alerts.service';
+import {UserService} from '../../services/user/user.service';
+import {AlertService} from '../../services/alerts/alerts.service';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+	selector: 'app-register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private router: Router,
-        private userService: UserService,
-        private alertService: AlertService) { }
+	registerForm: FormGroup;
+	loading = false;
+	submitted = false;
 
-    ngOnInit() {
-        this.registerForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            email: ['', Validators.required],
-            name: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
-        });
-    }
+	constructor(
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private userService: UserService,
+		private alertService: AlertService) {
+	}
 
-    // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
+	// convenience getter for easy access to form fields
+	get f() {
+		return this.registerForm.controls;
+	}
 
-    onSubmit(e) {
-        
-        // e.preventDefalt();
+	ngOnInit() {
+		this.registerForm = this.formBuilder.group({
+			username: ['', Validators.required],
+			email: ['', Validators.required],
+			name: ['', Validators.required],
+			password: ['', [Validators.required, Validators.minLength(6)]],
+			passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
+		});
+	}
 
-        this.submitted = true;
+	onSubmit(e) {
 
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
+		// e.preventDefalt();
 
-        this.loading = true;
-        this.userService.register(this.registerForm.value)
-            .toPromise()
-            .then(
-                data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/']);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
-    }
+		this.submitted = true;
+
+		// stop here if form is invalid
+		if (this.registerForm.invalid) {
+			return;
+		}
+
+		this.loading = true;
+		this.userService.register(this.registerForm.value)
+			.toPromise()
+			.then(
+				data => {
+					this.alertService.success('Registration successful', true);
+					this.router.navigate(['/']);
+				},
+				error => {
+					this.alertService.error(error);
+					this.loading = false;
+				});
+	}
 
 
 }
