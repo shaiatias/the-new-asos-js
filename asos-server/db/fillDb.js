@@ -50,11 +50,17 @@ async function fillDb() {
     ];
 
     for (const user of users) {
-        await User.create(user).catch(err => console.error(err));
+        const count = await User.count({ username: user.username });
+        if (count == 0) {
+            await User.create(user).catch(err => console.error(err));
+        }
     }
 
     for (const product of products) {
-        await Product.create(product).catch(err => console.error(err));
+        const count = await Product.count({ name: product.name });
+        if (count == 0) {
+            await Product.create(product).catch(err => console.error(err));
+        }
     }
 
     const carts = [
@@ -70,7 +76,10 @@ async function fillDb() {
 
 
     for (const cart of carts) {
-        await Cart.create(cart).catch(err => console.error(err));
+        const count = await Cart.count({ user: cart.user });
+        if (count == 0) {
+            await Cart.create(cart).catch(err => console.error(err));
+        }
     }
 }
 
