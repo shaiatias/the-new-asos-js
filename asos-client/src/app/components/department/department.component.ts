@@ -10,6 +10,7 @@ import { IProduct } from "src/app/models/product";
 })
 export class DepartmentComponent implements OnInit {
 	products: IProduct[];
+	department: string;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -18,10 +19,10 @@ export class DepartmentComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		const department = this.route.snapshot.params.department;
+		this.department = this.route.snapshot.params.department;
 		this.productsService
-			.getProductByDepartment(department)
-			.subscribe(
+			.getProductByDepartment(this.department)
+			.subscribe(	
 				next => (this.products = next),
 				err => this.onFetchError(err)
 			);

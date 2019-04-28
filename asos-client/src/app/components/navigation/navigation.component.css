@@ -1,7 +1,6 @@
-
 .sidenav {
 	width: 200px;
-	box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+	box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
 }
 
 .menu-container {
@@ -14,7 +13,11 @@
 	right: 0;
 }
 
-h1.app-name {
+.app-name:hover {
+	text-decoration: none;
+}
+.app-name {
+	color: white;
 	margin-left: 8px;
 }
 

@@ -49,6 +49,7 @@ import { OrdersListComponent } from './components/orders-list/orders-list.compon
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { OrdersService } from './services/orders/orders.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
 
 @NgModule({
 	declarations: [
@@ -67,7 +68,8 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 		ProductFormComponent,
 		OrdersListComponent,
 		AllOrdersComponent,
-		OrderDetailsComponent
+		OrderDetailsComponent,
+		ProductsListComponent
 	],
 	imports: [
 		HttpClientModule,

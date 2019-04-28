@@ -1,125 +1,126 @@
-const {User} = require("./users");
-const {Product} = require("./products");
-const {Cart} = require("./cart");
-const {Order} = require("./orders");
+const { User } = require("./users");
+const { Product } = require("./products");
+const { Cart } = require("./cart");
+const { Order } = require("./orders");
 
 async function fillDb() {
+	const users = [
+		{
+			username: "customer1",
+			email: "customer1@asos.com",
+			name: "customer 1",
+			password: "123456",
+			roles: ["customer"]
+		},
+		{
+			username: "seller1",
+			email: "seller1@asos.com",
+			name: "seller 1",
+			password: "123456",
+			roles: ["customer", "seller"]
+		},
+		{
+			username: "admin1",
+			email: "admin1@asos.com",
+			name: "admin 1",
+			password: "123456",
+			roles: ["customer", "seller", "admin"]
+		}
+	];
 
-    const users = [
-        {
-            username: "customer1",
-            email: "customer1@asos.com",
-            name: "customer 1",
-            password: "123456",
-            roles: ["customer"]
-        },
-        {
-            username: "seller1",
-            email: "seller1@asos.com",
-            name: "seller 1",
-            password: "123456",
-            roles: ["customer", "seller"]
-        },
-        {
-            username: "admin1",
-            email: "admin1@asos.com",
-            name: "admin 1",
-            password: "123456",
-            roles: ["customer", "seller", "admin"]
-        },
-    ];
+	const products = [
+		{
+			imageUrl: "assets/item_111.jpg",
+			name: "t shirt1",
+			price: 25,
+			department: "shirts",
+			description: "simple t shirt"
+		},
+		{
+			imageUrl: "assets/item_111.jpg",
+			name: "t shirt2",
+			price: 25,
+			department: "shirts",
+			description: "simple t shirt"
+		},
+		{
+			imageUrl: "assets/item_111.jpg",
+			name: "t shirt3",
+			price: 25,
+			department: "shirts",
+			description: "simple t shirt"
+		},
+		{
+			imageUrl: "assets/item_111.jpg",
+			name: "t shirt4",
+			price: 25,
+			department: "shirts",
+			description: "simple t shirt"
+		},
+		{
+			imageUrl: "assets/11794135.jpg",
+			name: "ASOS DESIGN midi cami slip dress",
+			price: 100,
+			department: "dress",
+			description:
+				"ASOS DESIGN midi cami slip dress in high shine with strappy back in tie dye print"
+		}
+	];
 
-    const products = [
-        {
-            imageUrl: "assets/item_111.jpg",
-            name: "t shirt1",
-            price: 25,
-            department: "shirts",
-            description: "simple t shirt"
-        },
-        {
-            imageUrl: "assets/item_111.jpg",
-            name: "t shirt2",
-            price: 25,
-            department: "shirts",
-            description: "simple t shirt"
-        },
-        {
-            imageUrl: "assets/item_111.jpg",
-            name: "t shirt3",
-            price: 25,
-            department: "shirts",
-            description: "simple t shirt"
-        },
-        {
-            imageUrl: "assets/item_111.jpg",
-            name: "t shirt4",
-            price: 25,
-            department: "shirts",
-            description: "simple t shirt"
-        },
-        {
-            imageUrl: "assets/item_111.jpg",
-            name: "t shirt5",
-            price: 25,
-            department: "shirts",
-            description: "simple t shirt"
-        }
-    ];
+	for (const user of users) {
+		const count = await User.count({ username: user.username });
+		if (count == 0) {
+			await User.create(user).catch(err => console.error(err));
+		}
+	}
 
-    for (const user of users) {
-        const count = await User.count({ username: user.username });
-        if (count == 0) {
-            await User.create(user).catch(err => console.error(err));
-        }
-    }
+	for (const product of products) {
+		const count = await Product.count({ name: product.name });
+		if (count == 0) {
+			await Product.create(product).catch(err => console.error(err));
+		}
+	}
 
-    for (const product of products) {
-        const count = await Product.count({ name: product.name });
-        if (count == 0) {
-            await Product.create(product).catch(err => console.error(err));
-        }
-    }
+	const carts = [
+		{
+			user: (await User.findOne({ email: "customer1@asos.com" }).exec())
+				._id,
+			products: [
+				(await Product.findOne({ name: "t shirt1" }).exec())._id,
+				(await Product.findOne({ name: "t shirt2" }).exec())._id
+			],
+			totalPrice: 0
+		}
+	];
 
-    const carts = [
-        {
-            user: (await User.findOne({email: "customer1@asos.com"}).exec())._id,
-            products: [
-                (await Product.findOne({name: "t shirt1"}).exec())._id,
-                (await Product.findOne({name: "t shirt2"}).exec())._id
-            ],
-            totalPrice: 0
-        }
-    ];
+	for (const cart of carts) {
+		const count = await Cart.count({ user: cart.user });
+		if (count == 0) {
+			await Cart.create(cart).catch(err => console.error(err));
+		}
+	}
 
-    for (const cart of carts) {
-        const count = await Cart.count({ user: cart.user });
-        if (count == 0) {
-            await Cart.create(cart).catch(err => console.error(err));
-        }
-    }
+	const orders = [
+		{
+			user: (await User.findOne({ email: "customer1@asos.com" }).exec())
+				._id,
+			products: [
+				(await Product.findOne({ name: "t shirt1" }).exec())._id,
+				(await Product.findOne({ name: "t shirt2" }).exec())._id
+			],
+			chargeResult: {
+				amount: 50,
+				chargeDate: new Date(),
+				transactionId: Math.floor(Math.random() * 100000)
+			},
+			createdDate: new Date(),
+			totalPrice: 50
+		}
+	];
 
-    const orders = [
-        {
-            user: (await User.findOne({email: "customer1@asos.com"}).exec())._id,
-            products: [
-                (await Product.findOne({name: "t shirt1"}).exec())._id,
-                (await Product.findOne({name: "t shirt2"}).exec())._id
-            ],
-            chargeResult: {
-                amount: 50,
-                chargeDate: new Date(),
-                transactionId: Math.floor(Math.random() * 100000)
-            },
-            createdDate: new Date(),
-            totalPrice: 50
-        }
-    ];
-
-    for (const order of orders) {
-        await Order.create(order).catch(err => console.error(err));
-    }
-
+	for (const order of orders) {
+		await Order.create(order).catch(err => console.error(err));
+	}
 }
 
-module.exports = {fillDb};
+module.exports = { fillDb };

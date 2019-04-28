@@ -1,9 +1,12 @@
-
 .wrapper {
 	min-width: 100%;
 	min-height: 200px;
 	overflow-x: auto;
 	display: flex;
+}
+
+img {
+	max-width: 300px;
 }
 
 .mat-button {
@@ -14,4 +17,3 @@
 	min-width: 200px;
 	margin: 10px;
 }
-
