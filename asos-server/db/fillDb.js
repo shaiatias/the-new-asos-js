@@ -31,28 +31,7 @@ async function fillDb() {
 	const products = [
 		{
 			imageUrl: "assets/item_111.jpg",
-			name: "t shirt1",
-			price: 25,
-			department: "shirts",
-			description: "simple t shirt"
-		},
-		{
-			imageUrl: "assets/item_111.jpg",
-			name: "t shirt2",
-			price: 25,
-			department: "shirts",
-			description: "simple t shirt"
-		},
-		{
-			imageUrl: "assets/item_111.jpg",
-			name: "t shirt3",
-			price: 25,
-			department: "shirts",
-			description: "simple t shirt"
-		},
-		{
-			imageUrl: "assets/item_111.jpg",
-			name: "t shirt4",
+			name: "ASOS t shirt",
 			price: 25,
 			department: "shirts",
 			description: "simple t shirt"
@@ -64,6 +43,48 @@ async function fillDb() {
 			department: "dress",
 			description:
 				"ASOS DESIGN midi cami slip dress in high shine with strappy back in tie dye print"
+		},
+		{
+			imageUrl: "assets/11442596.jpg",
+			name: "ASOS tye and dye",
+			price: 50,
+			department: "shirt",
+			description: "ASOS tye and dy with strappy back in tie dye print"
+		},
+		{
+			imageUrl: "assets/11342890.jpg",
+			name: "ASOS jeans",
+			price: 50,
+			department: "jeans",
+			description: "ASOS slim jeans for women"
+		},
+		{
+			imageUrl: "assets/11102043.jpg",
+			name: "ASOS suit for men",
+			price: 180,
+			department: "suits",
+			description: "ASOS blue suit for men"
+		},
+		{
+			imageUrl: "assets/17355.jpg",
+			name: "ASOS toxido jimmy",
+			price: 200,
+			department: "suits",
+			description: "ASOS black toxido for men"
+		},
+		{
+			imageUrl: "assets/23152.jpg",
+			name: "ASOS suit eddy",
+			price: 150,
+			department: "suits",
+			description: "ASOS blue suit with shirt for men"
+		},
+		{
+			imageUrl: "assets/11474524.jpg",
+			name: "PUMA black jacket",
+			price: 50,
+			department: "footwear",
+			description: "PUMA black jacket sportwear for men"
 		}
 	];
 
@@ -86,8 +107,9 @@ async function fillDb() {
 			user: (await User.findOne({ email: "customer1@asos.com" }).exec())
 				._id,
 			products: [
-				(await Product.findOne({ name: "t shirt1" }).exec())._id,
-				(await Product.findOne({ name: "t shirt2" }).exec())._id
+				(await Product.findOne({ name: "ASOS suit eddy" }).exec())._id,
+				(await Product.findOne({ name: "PUMA black jacket" }).exec())
+					._id
 			],
 			totalPrice: 0
 		}
@@ -105,16 +127,17 @@ async function fillDb() {
 			user: (await User.findOne({ email: "customer1@asos.com" }).exec())
 				._id,
 			products: [
-				(await Product.findOne({ name: "t shirt1" }).exec())._id,
-				(await Product.findOne({ name: "t shirt2" }).exec())._id
+				(await Product.findOne({ name: "ASOS t shirt" }).exec())._id,
+				(await Product.findOne({ name: "ASOS toxido jimmy" }).exec())
+					._id
 			],
 			chargeResult: {
-				amount: 50,
+				amount: 225,
 				chargeDate: new Date(),
 				transactionId: Math.floor(Math.random() * 100000)
 			},
 			createdDate: new Date(),
-			totalPrice: 50
+			totalPrice: 225
 		}
 	];
 

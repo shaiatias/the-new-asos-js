@@ -10,6 +10,9 @@ export class ProductsListComponent implements OnInit {
 	@Input()
 	products: IProduct[];
 
+	@Input()
+	showDepartment = false;
+
 	constructor() {}
 
 	ngOnInit() {}

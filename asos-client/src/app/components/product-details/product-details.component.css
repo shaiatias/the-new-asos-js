@@ -7,3 +7,8 @@
 	max-width: 650px;
 	margin: auto;
 }
+
+.product-img{
+	width:100%;
+	object-fit: cover;
+}

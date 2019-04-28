@@ -1,0 +1,9 @@
+div.container.row {
+	margin: auto;
+}
+
+.product-description {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

@@ -1,22 +1,28 @@
-<div class="container">
-	<div class="row">
-		<div
-			*ngFor="let product of products"
-			class="card mx-4 my-3"
-			style="width: 18rem;"
-		>
+<div class="row">
+	<div *ngFor="let product of products" class="col-xs-12 col-sm-6 col-md-4">
+		<mat-card class="card px-4 my-3 w-100">
 			<img
-				class="card-img-top"
+				mat-card-image
 				[src]="product.imageUrl"
-				alt="product.description"
+				[alt]="product.description"
 			/>
-			<div class="card-body">
-				<h5 class="card-title">{{ product.name }}</h5>
-				<p class="card-text">
+			<mat-card-content>
+				<p class="product-description">
 					{{ product.description }}
 				</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
+			</mat-card-content>
+			<mat-card-actions [align]="end">
+				<button
+					*ngIf="showDepartment"
+					mat-button
+					[routerLink]="['/department/', product.department]"
+				>
+					MORE {{ product.department }}
+				</button>
+				<button mat-button [routerLink]="['/product/', product?._id]">
+					BUY
+				</button>
+			</mat-card-actions>
+		</mat-card>
 	</div>
 </div>

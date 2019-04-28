@@ -12,3 +12,20 @@
 		</mat-card-actions>
 	</mat-card>
 </div>
+
+<div class="container">
+	<div class="row">
+		<div *ngFor="let product of products" class="card mx-4 my-3 col-sm-3">
+			<img class="card-img-top" [src]="product.imageUrl" alt="product.description" />
+			<div class="card-body">
+				<h5 class="card-title">{{ product.name }}</h5>
+				<p class="card-text">
+					{{ product.description }}
+				</p>
+				<button mat-button [routerLink]="['/product/', product?._id]">
+					BUY
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

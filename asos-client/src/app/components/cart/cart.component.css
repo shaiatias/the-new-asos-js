@@ -13,13 +13,15 @@ h1 {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	justify-content: stretch;
+	justify-content: center;
+	/* justify-content: stretch; */
 	align-items: start;
 }
 
 .summary-card {
 	min-width: 300px;
-	margin: 8px 0 0 16px;
+	margin-top: 8px;
+	/* margin: 8px 0 0 16px; */
 }
 
 .payment-card {

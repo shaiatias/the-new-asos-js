@@ -35,6 +35,7 @@ export class NavigationComponent {
 	}
 
 	ngOnInit() {
+		this.cartService.syncCartContent().toPromise();
 		this.cart$ = this.cartService.getCart();
 	}
 }
