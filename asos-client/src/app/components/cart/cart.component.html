@@ -1,5 +1,8 @@
 <div *ngIf="cart$ | async as cart" class=" row">
-	<div *ngIf="cart.products.length == 0" class="col-xs-12 col-sm-7">
+	<div
+		*ngIf="cart.products.length == 0"
+		class="col-xs-12 col-sm-7 text-center my-3"
+	>
 		Your cart is empty
 	</div>
 	<mat-list class="col-xs-12 col-sm-7">
