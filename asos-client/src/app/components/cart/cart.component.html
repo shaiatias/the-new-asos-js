@@ -1,26 +1,56 @@
-
-<div *ngIf="cart$ | async as cart" class="cart-view row">
-	<div *ngIf="cart.products.length==0" class="col-xs-12 col-sm-7">Your cart is empty</div>
+<div *ngIf="cart$ | async as cart" class=" row">
+	<div *ngIf="cart.products.length == 0" class="col-xs-12 col-sm-7">
+		Your cart is empty
+	</div>
 	<mat-list class="col-xs-12 col-sm-7">
 		<mat-card *ngFor="let product of cart.products">
-			<mat-card-content class="product-row">
-				<img [src]="product.item.imageUrl" alt="product.item.name" class="product-image">
+			<mat-card-content>
+				<div class="row">
+					<div class="col">
+						<img
+							[src]="product.item.imageUrl"
+							alt="product.item.name"
+							class="product-image col-6"
+						/>
+					</div>
+					<div class="col">
+						<div>
+							<mat-card-title
+								>{{ product.item.name }}
+								<button
+									(click)="
+										removeAllItemsFromCart(product.item)
+									"
+									class="quantity-button"
+								>
+									x
+								</button></mat-card-title
+							>
+							<p>{{ product.item.description }}</p>
+						</div>
+						<div class="product-actions">
+							<button
+								(click)="removePdtFromCart(product.item)"
+								class="quantity-button"
+							>
+								-
+							</button>
+							<mat-chip-list [selectable]="false">
+								<mat-chip>{{ product.quantity }}</mat-chip>
+							</mat-chip-list>
+							<button
+								(click)="addPdtToCart(product.item)"
+								class="quantity-button"
+							>
+								+
+							</button>
+						</div>
 
-				<div>
-					<mat-card-title>{{product.item.name}}</mat-card-title>
-					<p>{{product.item.description}}</p>
+						<div>
+							{{ product.item.price | currency: "USD":true }}
+						</div>
+					</div>
 				</div>
-				<div class="product-actions">
-					<button (click)="removePdtFromCart(product.item)" class="quantity-button">-</button>
-					<mat-chip-list [selectable]="false">
-						<mat-chip>{{ product.quantity }}</mat-chip>
-					</mat-chip-list>
-					<button (click)="addPdtToCart(product.item)" class="quantity-button">+</button>
-				</div>
-
-				<div>{{product.item.price | currency: 'USD':true}}</div>
-				<button (click)="removeAllItemsFromCart(product.item)" class="quantity-button">x</button>
-
 			</mat-card-content>
 		</mat-card>
 	</mat-list>
@@ -30,8 +60,8 @@
 			<mat-card class="summary-card">
 				<mat-card-content>
 					<h2>Cart Summary</h2>
-					<p> Price: {{ cart.totalPrice | currency: "USD": true}}</p>
-					<p> {{ cart.itemCount }} items</p>
+					<p>Price: {{ cart.totalPrice | currency: "USD":true }}</p>
+					<p>{{ cart.itemCount }} items</p>
 				</mat-card-content>
 			</mat-card>
 		</div>
@@ -43,48 +73,108 @@
 
 					<div>
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.name" type="text"
-								   placeholder="Name On Card" required>
-							<div *ngIf="nameMissing" class="invalid-feedback"> Username is required</div>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.name"
+								type="text"
+								placeholder="Name On Card"
+								required
+							/>
+							<div *ngIf="nameMissing" class="invalid-feedback">
+								Username is required
+							</div>
 						</mat-form-field>
-						<br>
+						<br />
 
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.address" placeholder="Address"
-								   name="address" required>
-							<div *ngIf="addressMissing" class="invalid-feedback">Address is required</div>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.address"
+								placeholder="Address"
+								name="address"
+								required
+							/>
+							<div
+								*ngIf="addressMissing"
+								class="invalid-feedback"
+							>
+								Address is required
+							</div>
 						</mat-form-field>
-						<br>
+						<br />
 
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.cardNumber"
-								   placeholder="Credit Card number" name="cardNumber" required>
-							<div *ngIf="cardMissing" class="invalid-feedback">Credit Card number is required</div>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.cardNumber"
+								placeholder="Credit Card number"
+								name="cardNumber"
+								required
+							/>
+							<div *ngIf="cardMissing" class="invalid-feedback">
+								Credit Card number is required
+							</div>
 						</mat-form-field>
-						<br>
+						<br />
 
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.expireMonth" placeholder="MM" type="text"
-								   name="expireMonth" required>
-							<div *ngIf="expireMonthMissing" class="invalid-feedback">Cvv is required</div>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.expireMonth"
+								placeholder="MM"
+								type="text"
+								name="expireMonth"
+								required
+							/>
+							<div
+								*ngIf="expireMonthMissing"
+								class="invalid-feedback"
+							>
+								Month is required
+							</div>
 						</mat-form-field>
+						<br />
+						<mat-form-field>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.expireYear"
+								placeholder="YYYY"
+								type="text"
+								name="expireYear"
+								required
+							/>
+							<div
+								*ngIf="expireYearMissing"
+								class="invalid-feedback"
+							>
+								Year is required
+							</div>
+						</mat-form-field>
+						<br />
 
 						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.expireYear" placeholder="YYYY" type="text"
-								   name="expireYear" required>
-							<div *ngIf="expireYearMissing" class="invalid-feedback">Cvv is required</div>
+							<input
+								matInput
+								[(ngModel)]="user?.paymentDetails.cvv"
+								placeholder="cvv"
+								type="text"
+								name="cvv"
+								required
+							/>
+							<div *ngIf="cvvMissing" class="invalid-feedback">
+								Cvv is required
+							</div>
 						</mat-form-field>
-						<br>
-
-						<mat-form-field>
-							<input matInput [(ngModel)]="user?.paymentDetails.cvv" placeholder="cvv" type="text"
-								   name="cvv" required>
-							<div *ngIf="cvvMissing" class="invalid-feedback">Cvv is required</div>
-						</mat-form-field>
-						<br>
+						<br />
 
 						<div class="button-row">
-							<button (click)="pay(cart._id)" mat-raised-button color="primary">Pay</button>
+							<button
+								(click)="pay(cart._id)"
+								mat-raised-button
+								color="primary"
+							>
+								Pay
+							</button>
 						</div>
 					</div>
 				</mat-card-content>

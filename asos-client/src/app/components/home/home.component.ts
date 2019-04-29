@@ -29,9 +29,7 @@ export class HomeComponent implements OnInit {
 	filter(query: string) {
 		console.log("query", query);
 		this.filteredProducts = query
-			? this.recommended.filter(p =>
-					p.name.toLowerCase().includes(query.toLowerCase())
-			  )
+			? this.recommended.filter(p =>p.name.toLowerCase().includes(query.toLowerCase()))
 			: this.recommended;
 		console.log("filtered products", this.filteredProducts);
 	}

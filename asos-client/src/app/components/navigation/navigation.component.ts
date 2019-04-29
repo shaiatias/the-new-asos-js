@@ -1,6 +1,6 @@
 import { CartService } from "./../../services/cart/cart.service";
 import { Observable } from "rxjs";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { ICart } from "../../models/cart";
@@ -10,7 +10,7 @@ import { ICart } from "../../models/cart";
 	templateUrl: "./navigation.component.html",
 	styleUrls: ["./navigation.component.css"]
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
 	loggedIn$: Observable<boolean> = this.auth.isAuthenticated$();
 	isAdmin$: Observable<boolean> = this.auth.isAdmin$();
 	isSeller$: Observable<boolean> = this.auth.isSeller$();
