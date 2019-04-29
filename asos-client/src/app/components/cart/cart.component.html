@@ -6,26 +6,16 @@
 		<mat-card *ngFor="let product of cart.products">
 			<mat-card-content>
 				<div class="row">
-					<div class="col">
+					<div class="col align-middle">
 						<img
 							[src]="product.item.imageUrl"
 							alt="product.item.name"
-							class="product-image col-6"
+							class="product-image"
 						/>
 					</div>
 					<div class="col">
 						<div>
-							<mat-card-title
-								>{{ product.item.name }}
-								<button
-									(click)="
-										removeAllItemsFromCart(product.item)
-									"
-									class="quantity-button"
-								>
-									x
-								</button></mat-card-title
-							>
+							<h3>{{ product.item.name }}</h3>
 							<p>{{ product.item.description }}</p>
 						</div>
 						<div class="product-actions">
@@ -49,6 +39,13 @@
 						<div>
 							{{ product.item.price | currency: "USD":true }}
 						</div>
+						<button
+							mat-raised-button
+							color="warn"
+							(click)="removeAllItemsFromCart(product.item)"
+						>
+							REMOVE
+						</button>
 					</div>
 				</div>
 			</mat-card-content>
